@@ -1,12 +1,12 @@
 import type { AppProps } from 'next/app'
-import GlobalStyle from '@/styles/globalStyle'
-import BaseLayout from '@/layout/BaseLayout'
+import { GlobalStyles } from 'twin.macro'
+import BaseLayout from '@layout/BaseLayout'
 
 export default function App({ Component }: AppProps) {
   return (
     <>
       <BaseLayout>
-        <GlobalStyle />
+        <GlobalStyles />
         <Component />
       </BaseLayout>
     </>
