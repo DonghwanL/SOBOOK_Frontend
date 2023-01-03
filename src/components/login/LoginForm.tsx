@@ -1,17 +1,24 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import tw from 'twin.macro'
-import styled from '@emotion/styled'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import * as S from '@styles/loginStyle'
+import KakaoIcon from '@public/assets/images/kakao_icon.svg'
+import ModalPortal from '@components/common/modal/ModalPortal'
+import Modal from '@components/common/modal/Modal'
 
 interface FormType {
   id?: string
   password?: string
-  inputColor?: string
 }
 
 const LoginForm = () => {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>()
+
+  const onToggleModal = () => {
+    setIsOpenModal((prev) => !prev)
+  }
+
   const {
     register,
     handleSubmit,
@@ -23,6 +30,11 @@ const LoginForm = () => {
 
   const onSubmit = (data: FormType) => {
     console.log(data)
+    const { id, password } = data
+
+    if (id && password) {
+      onToggleModal()
+    }
   }
 
   useEffect(() => {
@@ -30,63 +42,51 @@ const LoginForm = () => {
   }, [setFocus])
 
   return (
-    <LoginWrapper>
-      <LoginTitle>로그인</LoginTitle>
+    <S.LoginWrapper>
+      <S.LoginTitle>로그인</S.LoginTitle>
       {/* Login Form */}
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <LoginInput
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.LoginInput
           {...register('id', {
-            required: '아이디를 입력 해주세요.',
+            required: true,
           })}
           type="text"
           placeholder="아이디"
           autoComplete="off"
           inputColor={errors.id ? '#F03A5F' : '#BAB7C3'}
         />
-        <ErrorMessage>{errors?.id?.message}</ErrorMessage>
-        <LoginInput
+        <S.LoginInput
           {...register('password', {
-            required: '비밀번호를 입력 해주세요.',
+            required: true,
           })}
           type="password"
           placeholder="비밀번호"
           autoComplete="off"
           inputColor={errors.password ? '#F03A5F' : '#BAB7C3'}
         />
-        <ErrorMessage>{errors?.password?.message}</ErrorMessage>
         {/* Button Group */}
-        <LoginButton type="submit">로그인</LoginButton>
-      </Form>
-    </LoginWrapper>
+        <S.LoginButton type="submit">로그인</S.LoginButton>
+        <S.KakaoButton type="button">
+          <Image src={KakaoIcon} alt="kakaoIcon" width={24} height={21} />
+          카카오로 시작하기
+        </S.KakaoButton>
+        <S.LoginFooter>
+          <S.SignupMessage>아직 회원이 아니신가요?</S.SignupMessage>
+          <Link href="/signup">
+            <S.SignupPageMoveBtn>회원가입</S.SignupPageMoveBtn>
+          </Link>
+        </S.LoginFooter>
+      </S.Form>
+      {/* Modal */}
+      {isOpenModal && (
+        <ModalPortal>
+          <Modal width="400px" onToggleModal={onToggleModal}>
+            <div>dd</div>
+          </Modal>
+        </ModalPortal>
+      )}
+    </S.LoginWrapper>
   )
 }
 
 export default LoginForm
-
-const Form = tw.form`
-  w-2/5 flex flex-col justify-center items-center
-`
-const LoginWrapper = tw.section`
-  container flex flex-col justify-center items-center mx-auto pt-10
-`
-const LoginTitle = tw.h1`
-  font-bold text-xl mb-10
-`
-const LoginInput = styled.input<FormType>`
-  ${tw`w-full rounded-md p-3`}
-  border: 1px solid ${(props) => props.inputColor};
-
-  &:focus {
-    outline: none;
-    border: 1px solid ${(props) => (props.inputColor === '#F03A5F' ? '#F03A5F' : '#1CC078')};
-  }
-`
-
-const LoginButton = tw.button`
-  w-full rounded-md p-3 mt-1 
-  font-bold text-white bg-indigo-500
-`
-
-const ErrorMessage = tw.span`
-  block text-red-600 text-xs font-semibold my-3
-`
