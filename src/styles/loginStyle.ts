@@ -1,7 +1,6 @@
 import tw from 'twin.macro'
 import styled from '@emotion/styled'
-
-interface StyleProps {
+interface LoginStyleProps {
   inputColor?: string
 }
 
@@ -14,7 +13,7 @@ export const LoginWrapper = tw.section`
 export const LoginTitle = tw.h1`
   font-bold text-xl mb-10
 `
-export const LoginInput = styled.input<StyleProps>`
+export const LoginInput = styled.input<LoginStyleProps>`
   ${tw`w-full rounded-md p-3 mb-5`}
   border: 1px solid ${(props) => props.inputColor};
 
@@ -38,9 +37,6 @@ export const KakaoButton = styled.button`
   }
 `
 
-export const ErrorMessage = tw.span`
-  block my-3 text-red-600 text-xs font-semibold
-`
 export const LoginFooter = tw.div`
   flex items-center
 `

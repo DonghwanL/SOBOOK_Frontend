@@ -7,7 +7,7 @@ import KakaoIcon from '@public/assets/images/kakao_icon.svg'
 import ModalPortal from '@components/common/modal/ModalPortal'
 import Modal from '@components/common/modal/Modal'
 
-interface FormType {
+interface LoginFormType {
   id?: string
   password?: string
 }
@@ -24,11 +24,11 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
     setFocus,
-  } = useForm<FormType>({
+  } = useForm<LoginFormType>({
     mode: 'onChange',
   })
 
-  const onSubmit = (data: FormType) => {
+  const onSubmit = (data: LoginFormType) => {
     console.log(data)
     const { id, password } = data
 
