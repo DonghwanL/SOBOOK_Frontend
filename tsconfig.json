@@ -21,6 +21,7 @@
       "@components/*": ["src/components/*"],
       "@layout/*": ["src/layout/*"],
       "@pages/*": ["src/pages/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@styles/*": ["src/styles/*"]
     }
   },
