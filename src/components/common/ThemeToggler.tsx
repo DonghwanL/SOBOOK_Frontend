@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline'
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 import tw from 'twin.macro'
 
 const ThemeToggler = () => {
