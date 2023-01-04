@@ -21,7 +21,7 @@ export const SignupBox = tw.div`
   w-full p-2
 `
 export const SignupFormLabel = tw.label`
-  block text-sm font-semibold mb-3 text-indigo-800 after:content-['*'] after:text-red-700 after:mx-1
+  block text-sm font-semibold mb-3 after:content-['*'] after:text-red-700 after:mx-1
 `
 
 export const SignupFormInput = styled.input<SignupStyleProps>`

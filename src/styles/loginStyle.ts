@@ -8,7 +8,7 @@ export const Form = tw.form`
   w-4/5 md:w-3/5 lg:w-2/5 flex flex-col justify-center items-center
 `
 export const LoginWrapper = tw.section`
-  container flex flex-col justify-center items-center mx-auto pt-12
+  container flex flex-col justify-center items-center mx-auto pt-14
 `
 export const LoginTitle = tw.h1`
   font-bold text-xl mb-10
