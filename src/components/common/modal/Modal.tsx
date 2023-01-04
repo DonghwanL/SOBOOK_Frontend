@@ -57,7 +57,7 @@ const ContentWrapper = tw.div`
 `
 
 const Content = tw.div`
-  mt-3
+  mt-3 text-black
 `
 
 const ContentFooter = tw.div`
