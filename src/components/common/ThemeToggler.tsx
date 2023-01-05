@@ -7,13 +7,24 @@ const ThemeToggler = () => {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    setMounted(true)
+    const themeMode = localStorage.getItem('theme')
+    if (themeMode) setTheme(themeMode)
+  }, [setTheme])
+
   if (!mounted) return null
 
+  const onClickThemeIcon = () => {
+    const themeMode = theme === 'light' ? 'dark' : 'light'
+    localStorage.setItem('theme', themeMode)
+    setTheme(themeMode)
+  }
+
   return (
-    <DarkModeToggleBtn onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label="Toggle Dark Mode">
+    <DarkModeToggleBtn onClick={onClickThemeIcon} aria-label="Toggle Dark Mode">
       {theme === 'light' ? (
-        <MoonIcon className="text-indigo-500 w-5 h-5" />
+        <MoonIcon className="text-yellow-500 w-5 h-5" />
       ) : (
         <SunIcon className="text-yellow-500 w-5 h-5" />
       )}
