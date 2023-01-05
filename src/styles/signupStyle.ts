@@ -9,7 +9,7 @@ export const Form = tw.form`
   w-4/5 md:w-3/5 lg:w-2/5 flex flex-col justify-center items-center
 `
 
-export const SignupWrapper = tw.section`
+export const SignupWrapper = tw.div`
   container flex flex-col justify-center items-center mx-auto pt-12 mb-5
 `
 

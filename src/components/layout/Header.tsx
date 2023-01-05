@@ -24,7 +24,7 @@ export default Header
 
 const HeaderWrapper = tw.header`
   flex justify-between items-center 
-  w-full py-5 px-10
+  w-full py-5 px-5 md:px-10 lg:px-10
 `
 const HeaderTitleGroup = tw.div`
   font-bold text-2xl
