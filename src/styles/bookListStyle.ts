@@ -13,7 +13,7 @@ export const BookListItems = tw.div`
   border-t border-gray-300
 `
 export const BookIndex = tw.span`
-  font-bold mr-3
+  font-bold mr-3 w-8
 `
 
 export const BookCheckbox = tw.div`
@@ -27,9 +27,13 @@ export const BookThumbnail = tw.div`
 export const BookDocuments = tw.div``
 
 export const BookTitle = tw.h1`
-  text-xl font-bold 
+  text-xl font-bold mb-2
 `
 
-export const BookAuthors = tw.span``
+export const BookAuthors = tw.span`
+  block mb-1
+`
 
-export const BookPublisher = tw.p``
+export const BookPublisher = tw.p`
+  mb-1
+`

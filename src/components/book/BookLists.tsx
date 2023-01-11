@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { FETCH_SEARCH_BOOKS } from '@src/lib/api/apiClient'
+import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
+import { v4 as uuidv4 } from 'uuid'
 import * as S from '@styles/bookListStyle'
 import BookListItems from './BookListItems'
 
@@ -25,7 +26,7 @@ const BookLists = () => {
   return (
     <S.BookListsWrapper>
       {bookList.map((el, index) => (
-        <BookListItems key={el.isbn} data={el} index={index} />
+        <BookListItems key={uuidv4()} data={el} index={index} />
       ))}
     </S.BookListsWrapper>
   )

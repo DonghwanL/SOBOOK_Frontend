@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as S from '@styles/loginStyle'
-import KakaoIcon from '@public/assets/images/kakao_icon.svg'
+import KakaoIcon from '@assets/images/kakao_icon.svg'
 import ModalPortal from '@components/common/modal/ModalPortal'
 import Modal from '@components/common/modal/Modal'
 

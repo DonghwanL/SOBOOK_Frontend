@@ -1,7 +1,15 @@
+import Image from 'next/image'
 import * as S from '@styles/bookListStyle'
+import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
 interface BookListProps {
-  data: any
+  data: {
+    title: string
+    thumbnail: string
+    authors: string
+    publisher: string
+    datetime: string
+  }
   index: number
 }
 
@@ -13,12 +21,19 @@ const BookListItems = ({ data, index }: BookListProps) => {
         <S.BookCheckbox>
           <input type="checkbox" />
         </S.BookCheckbox>
-        <S.BookThumbnail>이미지</S.BookThumbnail>
+        <S.BookThumbnail>
+          {!data.thumbnail && (
+            <Image className="w-full h-auto" src={NoFoundImage} alt="no_found_img" width={0} height={0} sizes="100vw" />
+          )}
+          {data.thumbnail && (
+            <Image className="w-full h-auto" src={data.thumbnail} alt="book_img" width={0} height={0} sizes="100vw" />
+          )}
+        </S.BookThumbnail>
         <S.BookDocuments>
           <S.BookTitle>{data.title}</S.BookTitle>
           <S.BookAuthors>{data.authors}</S.BookAuthors>
           <S.BookPublisher>
-            {data.publisher} / {data.datetime}
+            {data.publisher} / {new Date(data.datetime).toLocaleDateString()}
           </S.BookPublisher>
         </S.BookDocuments>
       </S.BookListItems>

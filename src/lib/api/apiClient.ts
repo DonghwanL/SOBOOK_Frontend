@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import { KAKAO_BOOK_SEARCH_API, KAKAO_API_KEY } from '@src/lib/api/config'
+import { KAKAO_BOOK_SEARCH_API, KAKAO_API_KEY } from '@lib/api/config'
 
 interface ParamsType {
   query: string

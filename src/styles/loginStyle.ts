@@ -5,7 +5,7 @@ interface LoginStyleProps {
 }
 
 export const Form = tw.form`
-  w-4/5 md:w-3/5 lg:w-2/5 flex flex-col justify-center items-center
+  w-4/5 md:w-3/5 lg:w-2/5 xl:w-1/5 flex flex-col justify-center items-center
 `
 export const LoginWrapper = tw.div`
   container flex flex-col justify-center items-center mx-auto pt-14
