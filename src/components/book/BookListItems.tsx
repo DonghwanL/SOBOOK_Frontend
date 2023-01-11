@@ -24,9 +24,7 @@ const BookListItems = ({ data }: BookListProps) => {
           {!data.thumbnail && (
             <Image className="w-full h-auto" src={NoFoundImage} alt="no_found_img" width={0} height={0} sizes="100vw" />
           )}
-          {data.thumbnail && (
-            <Image className="w-full h-auto" src={data.thumbnail} alt="book_img" width={0} height={0} sizes="100vw" />
-          )}
+          {data.thumbnail && <Image src={data.thumbnail} alt="book_img" width={80} height={80} />}
         </S.BookThumbnail>
         <S.BookDocuments>
           <S.BookTitle>{data.title}</S.BookTitle>
