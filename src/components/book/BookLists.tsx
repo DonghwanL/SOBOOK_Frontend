@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { SearchKeywordState } from '@/src/lib/store'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
 import { v4 as uuidv4 } from 'uuid'
 import * as S from '@components/Book/bookLists.style'
@@ -7,6 +9,7 @@ import SearchBar from '@components/Search/SearchBar'
 
 const BookLists = () => {
   const [bookList, setBookList] = useState([])
+  const searchKeyword = useRecoilValue(SearchKeywordState)
 
   useEffect(() => {
     fetchSearchBooks()
@@ -14,7 +17,7 @@ const BookLists = () => {
 
   const fetchSearchBooks = async () => {
     const params = {
-      query: '최신',
+      query: searchKeyword || '최신',
       sort: 'latest',
       page: 1,
       size: 10,
@@ -26,7 +29,7 @@ const BookLists = () => {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar fetchSearchBooks={fetchSearchBooks} />
       <S.BookListsWrapper>
         {bookList.map((el) => (
           <BookListItems key={uuidv4()} data={el} />

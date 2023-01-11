@@ -12,7 +12,7 @@ export const BookListItems = tw.div`
   flex items-center p-5
 `
 export const BookCheckbox = tw.div`
-  mr-3
+  mr-6
 `
 
 export const BookThumbnail = tw.div`
