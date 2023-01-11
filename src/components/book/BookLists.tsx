@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
 import { v4 as uuidv4 } from 'uuid'
-import * as S from '@styles/bookListStyle'
-import BookListItems from './BookListItems'
+import * as S from '@components/Book/bookLists.style'
+import BookListItems from '@components/Book/BookListItems'
 
 const BookLists = () => {
   const [bookList, setBookList] = useState([])
@@ -25,8 +25,8 @@ const BookLists = () => {
 
   return (
     <S.BookListsWrapper>
-      {bookList.map((el, index) => (
-        <BookListItems key={uuidv4()} data={el} index={index} />
+      {bookList.map((el) => (
+        <BookListItems key={uuidv4()} data={el} />
       ))}
     </S.BookListsWrapper>
   )

@@ -2,10 +2,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import * as S from '@styles/loginStyle'
+import * as S from '@components/Login/LoginForm.style'
 import KakaoIcon from '@assets/images/kakao_icon.svg'
-import ModalPortal from '@components/common/modal/ModalPortal'
-import Modal from '@components/common/modal/Modal'
+import ModalPortal from '@components/Common/Modal/ModalPortal'
+import Modal from '@components/Common/Modal/Modal'
 
 interface LoginFormType {
   id?: string

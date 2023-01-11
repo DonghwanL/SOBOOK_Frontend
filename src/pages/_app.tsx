@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 import { GlobalStyles } from 'twin.macro'
-import Layout from '@components/layout/Layout'
+import Layout from '@/src/components/Layout/Layout'
 import '../styles/tailwind.css'
 
 export default function App({ Component }: AppProps) {

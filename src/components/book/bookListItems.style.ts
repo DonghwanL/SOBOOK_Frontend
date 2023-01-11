@@ -1,21 +1,16 @@
 import tw from 'twin.macro'
 // import styled from '@emotion/styled'
 
-export const BookListsWrapper = tw.article`
-  w-full flex flex-col justify-center items-center mt-5
-`
-
 export const BookListItemsWrapper = tw.div`
-  w-full 
-`
-export const BookListItems = tw.div`
-  flex items-center p-8
-  border-t border-gray-300
-`
-export const BookIndex = tw.span`
-  font-bold mr-3 w-8
+  w-full rounded-md mb-5
+  bg-gray-100
+  dark:bg-slate-800
+  md:w-4/5 lg:w-4/5 xl:w-3/5
 `
 
+export const BookListItems = tw.div`
+  flex items-center p-5
+`
 export const BookCheckbox = tw.div`
   mr-10
 `
@@ -31,7 +26,7 @@ export const BookTitle = tw.h1`
 `
 
 export const BookAuthors = tw.span`
-  block mb-1
+  flex block mb-1
 `
 
 export const BookPublisher = tw.p`

@@ -1,23 +1,22 @@
 import Image from 'next/image'
-import * as S from '@styles/bookListStyle'
+import { v4 as uuidv4 } from 'uuid'
+import * as S from '@components/Book/bookListItems.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
 interface BookListProps {
   data: {
     title: string
     thumbnail: string
-    authors: string
+    authors: string[]
     publisher: string
     datetime: string
   }
-  index: number
 }
 
-const BookListItems = ({ data, index }: BookListProps) => {
+const BookListItems = ({ data }: BookListProps) => {
   return (
     <S.BookListItemsWrapper>
       <S.BookListItems>
-        <S.BookIndex>{index + 1}</S.BookIndex>
         <S.BookCheckbox>
           <input type="checkbox" />
         </S.BookCheckbox>
@@ -31,7 +30,7 @@ const BookListItems = ({ data, index }: BookListProps) => {
         </S.BookThumbnail>
         <S.BookDocuments>
           <S.BookTitle>{data.title}</S.BookTitle>
-          <S.BookAuthors>{data.authors}</S.BookAuthors>
+          <S.BookAuthors key={uuidv4()}>{data.authors.join(', ')}</S.BookAuthors>
           <S.BookPublisher>
             {data.publisher} / {new Date(data.datetime).toLocaleDateString()}
           </S.BookPublisher>

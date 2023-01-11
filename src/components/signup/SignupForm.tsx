@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import * as S from '@styles/signupStyle'
+import * as S from '@components/Signup/SignupForm.style'
 
 interface SignUpFormType {
   id: string

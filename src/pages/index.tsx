@@ -1,4 +1,4 @@
-import SEO from '@components/common/SEO'
+import SEO from '@/src/components/Common/SEO'
 import BookList from '@components/book/BookLists'
 
 export default function Home() {
