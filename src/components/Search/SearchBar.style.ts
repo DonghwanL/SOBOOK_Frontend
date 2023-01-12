@@ -6,7 +6,7 @@ export const SearchWrapper = tw.section`
   container flex justify-center items-center mt-5 mx-auto text-black p-6
 `
 export const SearchInput = tw.input`
-  outline-none h-10 border rounded-md p-5 mr-3
+  outline-none h-10 border rounded-md p-5 mr-2
   w-4/5 md:w-3/5 lg:w-3/5 xl:w-2/5
   dark:bg-gray-100
 `

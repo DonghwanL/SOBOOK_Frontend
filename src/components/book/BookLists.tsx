@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil'
 import { SearchKeywordState } from '@/src/lib/store'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
 import { v4 as uuidv4 } from 'uuid'
-import * as S from '@components/Book/bookLists.style'
+import * as S from '@components/Book/BookLists.style'
 import BookListItems from '@components/Book/BookListItems'
 import SearchBar from '@components/Search/SearchBar'
 
