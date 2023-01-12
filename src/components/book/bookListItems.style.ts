@@ -9,7 +9,7 @@ export const BookListItemsWrapper = tw.div`
 `
 
 export const BookListItems = tw.div`
-   p-5 flex flex-col items-center justify-center
+   p-6 flex flex-col items-center justify-center
    sm:flex-row
 `
 export const BookCheckbox = tw.div`
@@ -36,11 +36,11 @@ export const BookAuthors = tw.span`
 `
 
 export const BookPublisher = tw.p`
-  mb-3
-  text-sm sm:text-base
+  mb-5
+  text-sm sm:text-base sm:mb-3
 `
 
 export const AddLibraryBtn = tw.button`
-  bg-indigo-400 rounded-md p-3 hover:bg-indigo-500
+  bg-indigo-400 rounded-md p-2 hover:bg-indigo-500
   font-bold text-xs text-white 
 `

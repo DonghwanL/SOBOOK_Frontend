@@ -12,4 +12,4 @@ const Layout = (props: { children: React.ReactNode }) => {
 
 export default Layout
 
-const Main = tw.main`h-screen`
+const Main = tw.main`h-auto`

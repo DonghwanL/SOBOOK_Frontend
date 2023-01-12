@@ -26,14 +26,14 @@ const BookListItems = ({ data }: BookListProps) => {
           )}
           {data.thumbnail && (
             <Image
-              src={data.thumbnail}
-              className="w-full h-auto"
-              alt="book_img"
-              loading="eager"
-              priority={true}
               width={0}
               height={0}
+              src={data.thumbnail}
               sizes="100vw"
+              loading="eager"
+              priority={true}
+              alt="book_img"
+              className="w-full h-auto"
             />
           )}
         </S.BookThumbnail>

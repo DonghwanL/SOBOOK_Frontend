@@ -35,5 +35,5 @@ const ThemeToggler = () => {
 export default ThemeToggler
 
 const DarkModeToggleBtn = tw.button`
-  w-8 h-8 p-1 rounded-lg dark:bg-slate-800 flex items-center justify-center transition-all duration-300 focus:outline-none
+  w-8 h-8 p-1 rounded-lg flex items-center justify-center transition-all duration-300 focus:outline-none
 `
