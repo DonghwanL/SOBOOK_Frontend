@@ -11,7 +11,7 @@ import Pagination from '@components/Common/Pagination/Pagination'
 const BookLists = () => {
   const [bookList, setBookList] = useState([])
   const [pageCount, setPageCount] = useState(0)
-  const [isFetch, setIsFetch] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const searchKeyword = useRecoilValue(SearchKeywordState)
   const fetchPage = useRecoilValue(fetchPageState)
 
@@ -27,15 +27,17 @@ const BookLists = () => {
       size: 10,
     }
 
+    console.log(params)
+
     const response = await FETCH_SEARCH_BOOKS(params)
     setBookList(response.data.documents)
     setPageCount(response.data.meta.pageable_count || 1)
-    setIsFetch(true)
+    setIsLoading(true)
   }
 
   return (
     <>
-      {isFetch && (
+      {isLoading && (
         <>
           <SearchBar fetchSearchBooks={fetchSearchBooks} />
           <S.BookListsWrapper>

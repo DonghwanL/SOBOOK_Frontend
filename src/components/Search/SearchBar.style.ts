@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 export const SearchWrapper = tw.section`
-  container flex justify-center items-center mt-5 mx-auto text-black p-6
+  container flex justify-center items-center ∂mx-auto text-black p-6
 `
 export const SearchInput = tw.input`
   outline-none h-10 border rounded-md p-5 mr-2

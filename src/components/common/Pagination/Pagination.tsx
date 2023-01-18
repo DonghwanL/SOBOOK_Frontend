@@ -1,6 +1,6 @@
-import { MouseEvent, useState } from 'react'
+import { MouseEvent } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { fetchPageState, activedPageState } from '@/src/lib/store'
+import { fetchPageState, startPageState, activedPageState } from '@/src/lib/store'
 import * as S from '@components/Common/Pagination/Pagination.style'
 
 interface PaginationProps {
@@ -9,15 +9,15 @@ interface PaginationProps {
 }
 
 const Pagination = ({ count, fetchSearchBooks }: PaginationProps) => {
-  const [startPage, setStartPage] = useState(1)
+  const [startPage, setStartPage] = useRecoilState(startPageState)
   const [activedPage, setActivedPage] = useRecoilState(activedPageState)
   const lastPage = count ? Math.ceil(count / 10) : 0
-  const fetchPage = useSetRecoilState(fetchPageState)
+  const setFetchPage = useSetRecoilState(fetchPageState)
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     const activedPage = Number(event.currentTarget.id)
     setActivedPage(activedPage)
-    fetchPage(activedPage)
+    setFetchPage(activedPage)
     fetchSearchBooks()
   }
 
@@ -25,7 +25,7 @@ const Pagination = ({ count, fetchSearchBooks }: PaginationProps) => {
     if (startPage === 1) return
     setStartPage(startPage - 10)
     setActivedPage(startPage - 10)
-    fetchPage(startPage - 10)
+    setFetchPage(startPage - 10)
     fetchSearchBooks()
   }
 
@@ -33,7 +33,7 @@ const Pagination = ({ count, fetchSearchBooks }: PaginationProps) => {
     if (startPage + 10 <= lastPage) {
       setStartPage(startPage + 10)
       setActivedPage(startPage + 10)
-      fetchPage(startPage + 10)
+      setFetchPage(startPage + 10)
       fetchSearchBooks()
     }
   }

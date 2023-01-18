@@ -11,6 +11,11 @@ export const fetchPageState = atom({
   default: 1,
 })
 
+export const startPageState = atom({
+  key: `startPageState/${uuidv4()}`,
+  default: 1,
+})
+
 export const activedPageState = atom({
   key: `activedPageState/${uuidv4()}`,
   default: 1,

@@ -15,7 +15,7 @@ export const LoginTitle = tw.h1`
   font-bold text-xl mb-10
 `
 export const LoginInput = styled.input<LoginStyleProps>`
-  ${tw`w-full rounded-md p-3 mb-5`}
+  ${tw`w-full rounded-md p-3 mb-5 dark:bg-white`}
   border: 1px solid ${(props) => props.inputColor};
 
   &:focus {
