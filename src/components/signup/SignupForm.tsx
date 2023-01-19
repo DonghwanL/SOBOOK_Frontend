@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from '@utils/signupValidationSchema'
 import * as S from '@components/Signup/SignupForm.style'
 
-export interface SignUpFormType {
+interface SignUpFormType {
   id: string
   email: string
   nickName: string

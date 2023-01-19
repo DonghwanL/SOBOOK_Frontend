@@ -27,7 +27,7 @@ const HeaderWrapper = tw.header`
   w-full py-5 px-5 md:px-10 lg:px-10
 `
 const HeaderTitleGroup = tw.div`
-  font-bold text-2xl
+  font-extrabold text-2xl
 `
 const HeaderNav = tw.nav`
   flex justify-center items-center
