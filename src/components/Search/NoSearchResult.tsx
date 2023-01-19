@@ -11,5 +11,5 @@ const NoSearchResult = () => {
 export default NoSearchResult
 
 const NoSearchResultWrapper = tw.div`
-  p-10 font-semibold
+  p-6 font-semibold
 `
