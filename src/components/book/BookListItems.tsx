@@ -11,6 +11,7 @@ interface BookListProps {
     publisher: string
     datetime: string
   }
+  key: string
 }
 
 const BookListItems = ({ data }: BookListProps) => {
@@ -30,7 +31,6 @@ const BookListItems = ({ data }: BookListProps) => {
               height={0}
               src={data.thumbnail}
               sizes="100vw"
-              loading="eager"
               priority={true}
               alt="book_img"
               className="w-full h-auto"

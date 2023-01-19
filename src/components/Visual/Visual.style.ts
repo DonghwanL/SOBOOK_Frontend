@@ -12,7 +12,7 @@ export const VisualBox = tw.div`
   sm:flex-row
 `
 export const VisualContent = tw.div`
-  flex flex-col justify-center items-center p-1
+  flex flex-col justify-center items-center p-3
   sm:p-6 sm:grow sm:flex-row sm:justify-between
 `
 export const VisualTitleBox = tw.div`
@@ -23,5 +23,5 @@ export const VisualTitle = tw.h1`
   sm:text-2xl
 `
 export const VisualSubTitle = tw.p`
-  text-xs sm:text-sm
+  text-sm
 `
