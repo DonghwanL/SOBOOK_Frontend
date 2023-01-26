@@ -1,20 +1,24 @@
 import axios, { AxiosInstance } from 'axios'
-import { KAKAO_BOOK_SEARCH_API, KAKAO_API_KEY } from '@lib/api/config'
+import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET } from '@lib/api/config'
 
 interface ParamsType {
   query: string
-  sort: string
-  page: number
-  size: number
+  sort?: string
+  start?: number
+  display?: number
 }
 
 export const apiClient: AxiosInstance = axios.create({
-  baseURL: `${KAKAO_BOOK_SEARCH_API}`,
   headers: {
-    Authorization: `KakaoAK ${KAKAO_API_KEY}`,
+    'X-Naver-Client-Id': NAVER_CLIENT_ID,
+    'X-Naver-Client-Secret': NAVER_CLIENT_SECRET,
   },
 })
 
 export const FETCH_SEARCH_BOOKS = (params: ParamsType) => {
-  return apiClient.get('/v3/search/book', { params })
+  return apiClient.get('/api/v1/search/book.json', { params })
 }
+
+// export const FETCH_SEARCH_DETAIL_BOOK = (params: ParamsType) => {
+//   return apiClient.get('/v3/search/book', { params })
+// }

@@ -24,7 +24,7 @@ export default class MyDocument extends Document {
         <Head>
           <link
             rel="preload"
-            type="text/css"
+            as="font"
             crossOrigin="anonymous"
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
           />

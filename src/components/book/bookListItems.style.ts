@@ -26,8 +26,8 @@ export const BookDocuments = tw.div`
 `
 
 export const BookTitle = tw.h1`
-  text-base font-bold mb-2
-  sm:text-lg lg:text-xl
+  text-base font-bold mb-2 cursor-pointer
+  sm:text-lg 
 `
 
 export const BookAuthors = tw.span`

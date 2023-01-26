@@ -1,20 +1,27 @@
 import Image from 'next/image'
-import { v4 as uuidv4 } from 'uuid'
+import { useRouter } from 'next/router'
 import * as S from '@components/Book/BookListItems.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
 interface BookListProps {
   data: {
     title: string
-    thumbnail: string
-    authors: string[]
+    image: string
+    author: string
     publisher: string
-    datetime: string
+    pubdate: string
+    isbn: string
   }
   key: string
 }
 
 const BookListItems = ({ data }: BookListProps) => {
+  const router = useRouter()
+
+  const onClickDetailBook = (id: string) => () => {
+    router.push(`/books/${id}`)
+  }
+
   return (
     <S.BookListItemsWrapper>
       <S.BookListItems>
@@ -22,14 +29,14 @@ const BookListItems = ({ data }: BookListProps) => {
           <input type="checkbox" />
         </S.BookCheckbox>
         <S.BookThumbnail>
-          {!data.thumbnail && (
+          {!data.image && (
             <Image className="w-full h-auto" src={NoFoundImage} alt="no_found_img" width={0} height={0} sizes="100vw" />
           )}
-          {data.thumbnail && (
+          {data.image && (
             <Image
               width={0}
               height={0}
-              src={data.thumbnail}
+              src={data.image}
               sizes="100vw"
               priority={true}
               alt="book_img"
@@ -38,10 +45,10 @@ const BookListItems = ({ data }: BookListProps) => {
           )}
         </S.BookThumbnail>
         <S.BookDocuments>
-          <S.BookTitle>{data.title}</S.BookTitle>
-          <S.BookAuthors key={uuidv4()}>{data.authors.join(', ')}</S.BookAuthors>
+          <S.BookTitle onClick={onClickDetailBook(data.isbn)}>{data.title}</S.BookTitle>
+          <S.BookAuthors key={data.isbn}>{data.author.replace('^', ', ')}</S.BookAuthors>
           <S.BookPublisher>
-            {data.publisher} / {new Date(data.datetime).toLocaleDateString()}
+            {data.publisher} / {data.pubdate}
           </S.BookPublisher>
           <S.AddLibraryBtn>서재에 담기</S.AddLibraryBtn>
         </S.BookDocuments>

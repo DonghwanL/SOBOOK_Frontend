@@ -22,17 +22,14 @@ const BookLists = () => {
   const fetchSearchBooks = async () => {
     console.log(fetchPage)
     const params = {
-      query: searchKeyword || '해리포터',
-      sort: 'latest',
-      page: fetchPage || 1,
-      size: 10,
+      query: '책',
+      sort: 'date',
+      start: fetchPage || 1,
     }
 
-    console.log(params)
-
     const response = await FETCH_SEARCH_BOOKS(params)
-    setBookList(response.data.documents)
-    setPageCount(response.data.meta.pageable_count || 1)
+    setBookList(response.data.items)
+    setPageCount(response.data.total || 1)
     setIsLoading(true)
   }
 
