@@ -22,7 +22,7 @@ const BookLists = () => {
   const fetchSearchBooks = async () => {
     console.log(fetchPage)
     const params = {
-      query: '책',
+      query: searchKeyword || '해리포터',
       sort: 'date',
       start: fetchPage || 1,
     }

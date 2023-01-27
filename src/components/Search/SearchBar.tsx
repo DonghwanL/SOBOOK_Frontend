@@ -10,7 +10,6 @@ type SearchBarProps = {
 }
 
 const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
-  const [keyword, setKeyword] = useState('')
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [searchKeyword, setSearchKeyword] = useRecoilState(SearchKeywordState)
   const [fetchPage, setFetchPage] = useRecoilState(fetchPageState)
@@ -22,7 +21,6 @@ const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
   }
 
   const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value)
     setSearchKeyword(event.target.value)
   }
 
@@ -38,9 +36,18 @@ const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
     fetchSearchBooks()
   }
 
+  const onClickSearchReset = () => {
+    setSearchKeyword('')
+  }
+
   return (
     <S.SearchWrapper>
-      <S.SearchInput type="text" placeholder="검색" value={keyword} onChange={onChangeKeyword} />
+      <S.SearchInput type="text" placeholder="검색" value={searchKeyword} onChange={onChangeKeyword} />
+      {searchKeyword && (
+        <S.SearchResetButton onClick={onClickSearchReset}>
+          <S.SearchResetIcon />
+        </S.SearchResetButton>
+      )}
       <S.SearchButton onClick={onClickSearch}>
         <S.SearchIcon />
       </S.SearchButton>

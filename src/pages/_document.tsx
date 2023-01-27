@@ -23,8 +23,8 @@ export default class MyDocument extends Document {
       <Html lang="ko-kr">
         <Head>
           <link
+            as="style"
             rel="preload"
-            as="font"
             crossOrigin="anonymous"
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
           />

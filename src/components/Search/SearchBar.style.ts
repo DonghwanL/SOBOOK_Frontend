@@ -1,21 +1,33 @@
 import tw from 'twin.macro'
 import styled from '@emotion/styled'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 
 export const SearchWrapper = tw.section`
-  container flex justify-center items-center mx-auto text-black p-6
+  flex justify-center items-center mx-auto my-5 text-black p-1
+  border rounded-lg
+  w-4/5 md:w-3/5 lg:w-3/5 xl:w-2/5
+  dark:bg-white
 `
 export const SearchInput = tw.input`
-  outline-none h-10 border rounded-md p-5 mr-2
-  w-4/5 md:w-3/5 lg:w-3/5 xl:w-2/5
-  dark:bg-gray-100
+  outline-none grow ml-2 p-2
+  dark:bg-white
 `
 export const SearchButton = tw.button`
-  w-14 p-3 rounded-md
+  w-14 p-3
   flex justify-center
-  opacity-80
-  bg-indigo-500 hover:opacity-100
+  hover:text-indigo-800
 `
+
+export const SearchResetButton = tw.button`
+  flex justify-center p-1
+  rounded-full bg-indigo-400 text-white
+  hover:bg-indigo-300
+`
+
 export const SearchIcon = styled(AiOutlineSearch)`
-  ${tw`text-xl font-bold text-white`}
+  ${tw`text-xl font-bold`}
+`
+
+export const SearchResetIcon = styled(AiOutlineClose)`
+  ${tw`text-xs font-bold`}
 `

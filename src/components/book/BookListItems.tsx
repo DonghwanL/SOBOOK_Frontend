@@ -46,7 +46,7 @@ const BookListItems = ({ data }: BookListProps) => {
         </S.BookThumbnail>
         <S.BookDocuments>
           <S.BookTitle onClick={onClickDetailBook(data.isbn)}>{data.title}</S.BookTitle>
-          <S.BookAuthors key={data.isbn}>{data.author.replace('^', ', ')}</S.BookAuthors>
+          <S.BookAuthors key={data.isbn}>{data.author.replaceAll('^', ', ')}</S.BookAuthors>
           <S.BookPublisher>
             {data.publisher} / {data.pubdate}
           </S.BookPublisher>
