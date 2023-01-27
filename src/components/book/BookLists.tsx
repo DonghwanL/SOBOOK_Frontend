@@ -15,14 +15,10 @@ const BookLists = () => {
   const searchKeyword = useRecoilValue(SearchKeywordState)
   const fetchPage = useRecoilValue(fetchPageState)
 
-  useEffect(() => {
-    fetchSearchBooks()
-  }, [])
-
   const fetchSearchBooks = async () => {
     console.log(fetchPage)
     const params = {
-      query: searchKeyword || '해리포터',
+      query: searchKeyword,
       sort: 'date',
       start: fetchPage || 1,
     }
@@ -35,9 +31,9 @@ const BookLists = () => {
 
   return (
     <>
+      <SearchBar fetchSearchBooks={fetchSearchBooks} />
       {isLoading && (
         <>
-          <SearchBar fetchSearchBooks={fetchSearchBooks} />
           <S.BookListsWrapper>
             {bookList.length ? bookList.map((el) => <BookListItems key={el.isbn} data={el} />) : <NoResult />}
           </S.BookListsWrapper>
