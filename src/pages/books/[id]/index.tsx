@@ -1,28 +1,12 @@
-import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { FETCH_SEARCH_DETAIL_BOOK } from '@lib/api/apiClient'
+import { useRecoilValue } from 'recoil'
+import { bookDetailSelector } from '@lib/store'
 
 const BookDetail = () => {
   const router = useRouter()
-  console.log(String(router.query.id))
+  const arr = useRecoilValue(bookDetailSelector(router.query.id))
 
-  useEffect(() => {
-    fetchSearchDetailBook()
-  }, [])
-
-  const fetchSearchDetailBook = async () => {
-    const params = {
-      query: router.query.id,
-      target: 'isbn',
-    }
-
-    console.log(params)
-
-    const response = await FETCH_SEARCH_DETAIL_BOOK(params)
-    console.log(response.data)
-  }
-
-  return <div></div>
+  return <>{arr.map((el) => console.log(el))}</>
 }
 
 export default BookDetail

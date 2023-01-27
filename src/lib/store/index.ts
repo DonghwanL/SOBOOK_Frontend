@@ -1,8 +1,25 @@
-import { atom } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
+import { atom, selectorFamily } from 'recoil'
 
-export const SearchKeywordState = atom({
-  key: `SearchKeywordState/${uuidv4()}`,
+// Fetch Data
+export const bookListState = atom({
+  key: `bookListState/${uuidv4()}`,
+  default: [],
+})
+
+export const bookDetailSelector = selectorFamily({
+  key: 'bookDetailState',
+  get:
+    (params) =>
+    ({ get }) => {
+      const bookList = get(bookListState)
+      return bookList.filter((item) => item.isbn === params)
+    },
+})
+
+// Search & Pagination
+export const searchKeywordState = atom({
+  key: `searchKeywordState/${uuidv4()}`,
   default: '',
 })
 

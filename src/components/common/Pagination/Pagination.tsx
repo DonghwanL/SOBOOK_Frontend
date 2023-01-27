@@ -11,8 +11,8 @@ interface PaginationProps {
 const Pagination = ({ count, fetchSearchBooks }: PaginationProps) => {
   const [startPage, setStartPage] = useRecoilState(startPageState)
   const [activedPage, setActivedPage] = useRecoilState(activedPageState)
-  const lastPage = count ? Math.ceil(count / 10) : 0
   const setFetchPage = useSetRecoilState(fetchPageState)
+  const lastPage = count ? Math.ceil(count / 10) : 0
 
   const onClickPage = (event: MouseEvent<HTMLSpanElement>) => {
     const activedPage = Number(event.currentTarget.id)
