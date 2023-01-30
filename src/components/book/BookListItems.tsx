@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import * as S from '@components/Book/BookListItems.style'
@@ -48,7 +49,7 @@ const BookListItems = ({ data }: BookListProps) => {
           <S.BookTitle onClick={onClickDetailBook(data.isbn)}>{data.title}</S.BookTitle>
           <S.BookAuthors key={data.isbn}>{data.author.replaceAll('^', ', ')}</S.BookAuthors>
           <S.BookPublisher>
-            {data.publisher} / {data.pubdate}
+            {data.publisher} / {dayjs(data.pubdate).format('YYYY.MM.DD')}
           </S.BookPublisher>
           <S.AddLibraryBtn>서재에 담기</S.AddLibraryBtn>
         </S.BookDocuments>
