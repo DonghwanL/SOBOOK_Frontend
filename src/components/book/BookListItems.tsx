@@ -26,9 +26,6 @@ const BookListItems = ({ data }: BookListProps) => {
   return (
     <S.BookListItemsWrapper>
       <S.BookListItems>
-        <S.BookCheckbox>
-          <input type="checkbox" />
-        </S.BookCheckbox>
         <S.BookThumbnail>
           {!data.image && (
             <Image className="w-full h-auto" src={NoFoundImage} alt="no_found_img" width={0} height={0} sizes="100vw" />
@@ -51,7 +48,6 @@ const BookListItems = ({ data }: BookListProps) => {
           <S.BookPublisher>
             {data.publisher} / {dayjs(data.pubdate).format('YYYY.MM.DD')}
           </S.BookPublisher>
-          <S.AddLibraryBtn>서재에 담기</S.AddLibraryBtn>
         </S.BookDocuments>
       </S.BookListItems>
     </S.BookListItemsWrapper>

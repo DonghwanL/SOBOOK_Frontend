@@ -1,44 +1,47 @@
 import { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { searchKeywordState, fetchPageState, bookListState } from '@lib/store'
+import { searchKeywordState, bookListState } from '@lib/store'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
+import { bookLists } from '@type/bookLists'
 import * as S from '@components/Book/BookLists.style'
-import BookListItems from '@components/Book/BookListItems'
 import SearchBar from '@components/Search/SearchBar'
-import Pagination from '@components/Common/Pagination/Pagination'
+import BookListItems from '@components/Book/BookListItems'
 import NoResult from '@components/Search/NoSearchResult'
 
 const BookLists = () => {
-  const [pageCount, setPageCount] = useState(0)
-  const [isLoading, setIsLoading] = useState(false)
-  const [bookList, setBookList] = useRecoilState(bookListState)
+  const [isFetch, setIsFetch] = useState(false)
+  const [bookLists, setBookLists] = useRecoilState(bookListState)
   const searchKeyword = useRecoilValue(searchKeywordState)
-  const fetchPage = useRecoilValue(fetchPageState)
 
   const fetchSearchBooks = async () => {
-    // console.log(fetchPage)
+    setIsFetch(false)
+
     const params = {
       query: searchKeyword,
       sort: 'date',
-      start: fetchPage || 1,
+      start: 1,
     }
 
-    const response = await FETCH_SEARCH_BOOKS(params)
-    setBookList(response.data.items)
-    setPageCount(response.data.total || 1)
-    setIsLoading(true)
+    try {
+      const response = await FETCH_SEARCH_BOOKS(params)
+      setBookLists(response.data.items)
+      setIsFetch(true)
+    } catch {
+      console.error('Fetching Error')
+    }
   }
 
   return (
     <>
       <SearchBar fetchSearchBooks={fetchSearchBooks} />
-      {isLoading && (
-        <>
-          <S.BookListsWrapper>
-            {bookList.length ? bookList.map((el) => <BookListItems key={el.isbn} data={el} />) : <NoResult />}
-          </S.BookListsWrapper>
-          <Pagination fetchSearchBooks={fetchSearchBooks} count={pageCount} />
-        </>
+      {isFetch && (
+        <S.BookListsWrapper>
+          {bookLists.length ? (
+            bookLists.map((el: bookLists) => <BookListItems key={el.isbn} data={el} />)
+          ) : (
+            <NoResult />
+          )}
+        </S.BookListsWrapper>
       )}
     </>
   )
