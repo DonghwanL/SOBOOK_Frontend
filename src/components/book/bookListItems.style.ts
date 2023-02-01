@@ -32,6 +32,5 @@ export const BookAuthors = tw.span`
 `
 
 export const BookPublisher = tw.p`
-  mb-5
-  text-sm sm:text-base sm:mb-3
+  text-sm sm:text-base
 `

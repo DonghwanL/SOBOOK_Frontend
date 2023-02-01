@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { searchKeywordState, bookListState } from '@lib/store'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
@@ -12,6 +12,10 @@ const BookLists = () => {
   const [isFetch, setIsFetch] = useState(false)
   const [bookLists, setBookLists] = useRecoilState(bookListState)
   const searchKeyword = useRecoilValue(searchKeywordState)
+
+  useEffect(() => {
+    if (bookLists.length) setIsFetch(true)
+  }, [bookLists])
 
   const fetchSearchBooks = async () => {
     setIsFetch(false)
