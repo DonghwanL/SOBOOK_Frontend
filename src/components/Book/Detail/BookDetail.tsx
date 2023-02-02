@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import * as S from '@pages/books/[id]/bookDetail.style'
+import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 import { useRouter } from 'next/router'
 

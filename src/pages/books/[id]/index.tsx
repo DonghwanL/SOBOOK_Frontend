@@ -5,8 +5,8 @@ import { bookDetailState } from '@/src/lib/store'
 import { parseString } from 'xml2js'
 import { BookListsType } from '@type/bookLists'
 import { FETCH_SEARCH_DETAIL_BOOK } from '@lib/api/apiClient'
-import BookDetail from '@/src/components/Book/BookDetail'
-import SkeletonElement from '@components/Skeleton/Skeleton'
+import BookDetail from '@components/Book/Detail/BookDetail'
+import SkeletonElement from '@components/Common/Skeleton/Skeleton'
 
 type IndexSignatureType = {
   [key: string]: string
@@ -41,7 +41,7 @@ const BookDetailPage = () => {
 
         newArr.push(newObj)
         setDetailBook(newArr)
-        setIsFetch(true)
+        // setIsFetch(true)
       })
     } catch {
       console.error('Detail Fetching Error')

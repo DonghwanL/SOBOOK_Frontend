@@ -1,7 +1,7 @@
 import LoginForm from '@components/Login/LoginForm'
 
-const Login = () => {
+const LoginPage = () => {
   return <LoginForm></LoginForm>
 }
 
-export default Login
+export default LoginPage

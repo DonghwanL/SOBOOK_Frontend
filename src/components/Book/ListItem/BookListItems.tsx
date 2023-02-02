@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import * as S from '@components/Book/BookListItems.style'
+import * as S from '@components/Book/ListItem/BookListItems.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
 interface BookListProps {

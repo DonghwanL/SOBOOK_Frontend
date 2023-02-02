@@ -3,9 +3,9 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { searchKeywordState, bookListState } from '@lib/store'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
 import { BookListsType } from '@type/bookLists'
-import * as S from '@components/Book/BookLists.style'
+import * as S from '@components/Book/List/BookLists.style'
 import SearchBar from '@components/Search/SearchBar'
-import BookListItems from '@components/Book/BookListItems'
+import BookListItems from '@components/Book/ListItem/BookListItems'
 import NoResult from '@components/Search/NoSearchResult'
 
 const BookLists = () => {
