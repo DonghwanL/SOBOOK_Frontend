@@ -1,6 +1,5 @@
+import { atom } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
-import { bookLists } from '@type/bookLists'
-import { atom, selectorFamily } from 'recoil'
 
 // Fetch Data
 export const bookListState = atom({
@@ -8,14 +7,9 @@ export const bookListState = atom({
   default: [],
 })
 
-export const bookDetailSelector = selectorFamily({
-  key: 'bookDetailState',
-  get:
-    (params: string) =>
-    ({ get }) => {
-      const bookList = get(bookListState)
-      return bookList.filter((item: bookLists) => item.isbn === params)
-    },
+export const bookDetailState = atom({
+  key: `bookDetailState/${uuidv4()}`,
+  default: [],
 })
 
 // Search & Pagination
