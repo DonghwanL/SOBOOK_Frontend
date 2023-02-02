@@ -3,27 +3,32 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { bookDetailSelector, bookListState } from '@lib/store'
-import { bookLists } from '@type/bookLists'
+import { parseString } from 'xml2js'
+import { BookListsType } from '@type/bookLists'
+import { FETCH_SEARCH_DETAIL_BOOK } from '@lib/api/apiClient'
 import * as S from '@pages/books/[id]/bookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
+type IndexSignatureType = {
+  [key: string]: string
+}
+
 const BookDetail = () => {
   const router = useRouter()
-  const [limit, setLimit] = useState(300)
-  const [bookLists, setBookLists] = useRecoilState(bookListState)
-  // const [detailBook, setDetailBook] = useState([])
-  const detailBook = useRecoilValue(bookDetailSelector(String(router.query.id)))
+  const [limit, setLimit] = useState(350)
+  const [detailBook, setDetailBook] = useState([])
 
+  // 뒤로 가기
   const onClickBackBtn = () => {
     router.back()
   }
 
+  // 더보기 클릭 시 원본 텍스트 세팅
   const onClickMore = (str: string) => () => {
     setLimit(str.length)
   }
 
+  // 글자 수 제한 함수
   const toggleMoreBtn = (str: string, limit: number) => {
     return {
       string: str.slice(0, limit),
@@ -31,27 +36,40 @@ const BookDetail = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if (router.isReady) fetchDetailBook()
-  // }, [router.isReady])
+  useEffect(() => {
+    if (router.isReady) fetchDetailBook()
+  }, [router.isReady])
 
-  // const fetchDetailBook = async () => {
-  //   const params = {
-  //     d_isbn: String(router.query.id),
-  //   }
+  // 상세보기 Fetch
+  const fetchDetailBook = async () => {
+    const params = {
+      d_isbn: String(router.query.id),
+    }
 
-  //   try {
-  //     const response = await FETCH_SEARCH_DETAIL_BOOK(params)
-  //     console.log(response.data)
-  //     setDetailBook(response.data.items)
-  //   } catch {
-  //     console.error('Detail Fetching Error')
-  //   }
-  // }
+    try {
+      const response = await FETCH_SEARCH_DETAIL_BOOK(params)
+
+      // XML to JSON
+      parseString(response.data, function (err, result) {
+        const data = result.rss.channel[0].item[0]
+        const newObj: IndexSignatureType = {}
+        const newArr: any = []
+
+        for (const key in data) {
+          newObj[key] = data[key].join()
+        }
+
+        newArr.push(newObj)
+        setDetailBook(newArr)
+      })
+    } catch {
+      console.error('Detail Fetching Error')
+    }
+  }
 
   return (
     <>
-      {detailBook.map((el: bookLists) => (
+      {detailBook.map((el: BookListsType) => (
         <S.BookDetailWrapper key={el.isbn}>
           <S.PageBackBtnBox>
             <S.PageBackBtn onClick={onClickBackBtn} />

@@ -1,4 +1,4 @@
-export interface bookLists {
+export interface BookListsType {
   title: string
   description: string
   discount: string

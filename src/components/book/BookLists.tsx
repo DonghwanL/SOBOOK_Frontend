@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { searchKeywordState, bookListState } from '@lib/store'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
-import { bookLists } from '@type/bookLists'
+import { BookListsType } from '@type/bookLists'
 import * as S from '@components/Book/BookLists.style'
 import SearchBar from '@components/Search/SearchBar'
 import BookListItems from '@components/Book/BookListItems'
@@ -41,7 +41,7 @@ const BookLists = () => {
       {isFetch && (
         <S.BookListsWrapper>
           {bookLists.length ? (
-            bookLists.map((el: bookLists) => <BookListItems key={el.isbn} data={el} />)
+            bookLists.map((el: BookListsType) => <BookListItems key={el.isbn} data={el} />)
           ) : (
             <NoResult />
           )}
