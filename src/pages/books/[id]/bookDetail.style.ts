@@ -43,7 +43,7 @@ export const AddLibraryBtn = tw.button`
 `
 
 export const BookDetailInfoWrapper = tw.div`
-  flex justify-between items-center p-6 mb-5
+  flex justify-between items-center p-6 mb-4
   rounded-lg
   w-4/5 xl:w-3/5
   bg-gray-100 dark:bg-slate-800
@@ -60,6 +60,13 @@ export const BookDetailInfoContent = tw.span`
   mb-1
 `
 export const BookDetailDescription = tw.div`
-  p-6 mb-10
+  p-7 mb-10
   text-sm leading-7
+`
+export const DescriptionMoreBtn = styled.button`
+  ${tw`text-gray-700 dark:text-gray-500`}
+
+  span {
+    ${tw`font-bold hover:text-gray-300`}
+  }
 `

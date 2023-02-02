@@ -4,7 +4,7 @@ export const BookListItemsWrapper = tw.div`
   rounded-md mb-5
   bg-gray-100
   dark:bg-slate-800
-  w-full md:w-4/5 lg:w-4/5 xl:w-3/5 2xl:w-3/5
+  w-full md:w-4/5 xl:w-3/5
 `
 
 export const BookListItems = tw.div`

@@ -19,3 +19,7 @@ export const apiClient: AxiosInstance = axios.create({
 export const FETCH_SEARCH_BOOKS = (params: ParamsType) => {
   return apiClient.get('/api/v1/search/book.json', { params })
 }
+
+export const FETCH_SEARCH_DETAIL_BOOK = (params: ParamsType) => {
+  return apiClient.get('/api/v1/search/book_adv.xml', { params })
+}

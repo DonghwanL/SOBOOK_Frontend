@@ -11,12 +11,24 @@ import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
 const BookDetail = () => {
   const router = useRouter()
+  const [limit, setLimit] = useState(300)
   const [bookLists, setBookLists] = useRecoilState(bookListState)
   // const [detailBook, setDetailBook] = useState([])
   const detailBook = useRecoilValue(bookDetailSelector(String(router.query.id)))
 
   const onClickBackBtn = () => {
     router.back()
+  }
+
+  const onClickMore = (str: string) => () => {
+    setLimit(str.length)
+  }
+
+  const toggleMoreBtn = (str: string, limit: number) => {
+    return {
+      string: str.slice(0, limit),
+      isShowMore: str.length > limit,
+    }
   }
 
   // useEffect(() => {
@@ -89,7 +101,14 @@ const BookDetail = () => {
               <S.BookDetailInfoSubject>출판일</S.BookDetailInfoSubject>
             </S.BookDetailInfoBox>
           </S.BookDetailInfoWrapper>
-          <S.BookDetailDescription>{el.description}</S.BookDetailDescription>
+          <S.BookDetailDescription>
+            {toggleMoreBtn(el.description, limit).string}
+            {toggleMoreBtn(el.description, limit).isShowMore && (
+              <S.DescriptionMoreBtn onClick={onClickMore(el.description)}>
+                <span>...더보기</span>
+              </S.DescriptionMoreBtn>
+            )}
+          </S.BookDetailDescription>
         </S.BookDetailWrapper>
       ))}
     </>

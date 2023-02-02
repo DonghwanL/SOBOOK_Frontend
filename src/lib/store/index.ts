@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
+import { bookLists } from '@type/bookLists'
 import { atom, selectorFamily } from 'recoil'
 
 // Fetch Data
@@ -10,10 +11,10 @@ export const bookListState = atom({
 export const bookDetailSelector = selectorFamily({
   key: 'bookDetailState',
   get:
-    (params) =>
+    (params: string) =>
     ({ get }) => {
       const bookList = get(bookListState)
-      return bookList.filter((item) => item.isbn === params)
+      return bookList.filter((item: bookLists) => item.isbn === params)
     },
 })
 
@@ -21,11 +22,6 @@ export const bookDetailSelector = selectorFamily({
 export const searchKeywordState = atom({
   key: `searchKeywordState/${uuidv4()}`,
   default: '',
-})
-
-export const fetchPageState = atom({
-  key: `fetchPageState/${uuidv4()}`,
-  default: 1,
 })
 
 export const startPageState = atom({
