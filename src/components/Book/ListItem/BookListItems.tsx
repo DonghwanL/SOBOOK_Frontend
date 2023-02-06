@@ -44,7 +44,7 @@ const BookListItems = ({ data }: BookListProps) => {
         </S.BookThumbnail>
         <S.BookDocuments>
           <S.BookTitle onClick={onClickDetailBook(data.isbn)}>{data.title}</S.BookTitle>
-          <S.BookAuthors key={data.isbn}>{data.author.replaceAll('.', ', ')}</S.BookAuthors>
+          <S.BookAuthors key={data.isbn}>{data.author.replaceAll('^', ', ')}</S.BookAuthors>
           <S.BookPublisher>
             {data.publisher} / {dayjs(data.pubdate).format('YYYY.MM.DD')}
           </S.BookPublisher>

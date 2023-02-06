@@ -64,7 +64,7 @@ const BookDetail = ({ data }: BookDetailProps) => {
         )}
       </S.BookDetailImage>
       <S.BookDetailTitle>{data.title}</S.BookDetailTitle>
-      <S.BookDetailAuthor>{data.author.replaceAll('.', ', ')}</S.BookDetailAuthor>
+      <S.BookDetailAuthor>{data.author.replaceAll('^', ', ')}</S.BookDetailAuthor>
       <S.BookDetailButtonGroup>
         <S.AddLibraryBtn>서재에 담기</S.AddLibraryBtn>
         <Link href={data.link} rel="noopener noreferrer" target="_blank">
