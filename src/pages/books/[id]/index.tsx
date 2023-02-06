@@ -6,7 +6,7 @@ import { parseString } from 'xml2js'
 import { BookListsType } from '@type/bookLists'
 import { FETCH_SEARCH_DETAIL_BOOK } from '@lib/api/apiClient'
 import BookDetail from '@components/Book/Detail/BookDetail'
-import SkeletonElement from '@components/Common/Skeleton/Skeleton'
+import SkeletonDetail from '@components/Common/Skeleton/SkeletonDetail'
 
 type IndexSignatureType = {
   [key: string]: string
@@ -41,7 +41,7 @@ const BookDetailPage = () => {
 
         newArr.push(newObj)
         setDetailBook(newArr)
-        // setIsFetch(true)
+        setIsFetch(true)
       })
     } catch {
       console.error('Detail Fetching Error')
@@ -51,7 +51,7 @@ const BookDetailPage = () => {
   return (
     <>
       {isFetch && detailBook.map((el: BookListsType) => <BookDetail key={el.isbn} data={el} />)}
-      {!isFetch && <SkeletonElement />}
+      {!isFetch && <SkeletonDetail />}
     </>
   )
 }
