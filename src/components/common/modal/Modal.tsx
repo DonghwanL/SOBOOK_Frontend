@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import tw from 'twin.macro'
-import useOnClickOutside from '@/src/hooks/useOutSideClick'
-import useKeyEscClose from '@/src/hooks/useKeyEscClose'
+import useOnClickOutside from '@hooks/useOutSideClick'
+import useKeyEscClose from '@hooks/useKeyEscClose'
 
 interface ModalProps {
   children: React.ReactNode

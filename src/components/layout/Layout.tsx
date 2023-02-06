@@ -1,5 +1,5 @@
 import tw from 'twin.macro'
-import Header from '@/src/components/Layout/Header'
+import Header from '@components/Layout/Header'
 
 const Layout = (props: { children: React.ReactNode }) => {
   return (

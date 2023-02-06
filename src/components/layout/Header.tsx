@@ -1,6 +1,6 @@
 import tw from 'twin.macro'
 import Link from 'next/link'
-import ThemeToggler from '@/src/components/Common/ThemeToggler'
+import ThemeToggler from '@components/Common/ThemeToggler'
 
 const Header = () => {
   return (

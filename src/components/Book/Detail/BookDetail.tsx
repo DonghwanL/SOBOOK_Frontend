@@ -1,10 +1,10 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
-import { useRouter } from 'next/router'
 
 interface BookDetailProps {
   data: {
