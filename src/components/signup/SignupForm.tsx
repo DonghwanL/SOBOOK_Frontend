@@ -5,9 +5,8 @@ import { schema } from '@utils/signupValidationSchema'
 import * as S from '@components/Signup/SignupForm.style'
 
 interface SignUpFormType {
-  id: string
   email: string
-  nickName: string
+  nickname: string
   password: string
   confirmPassword: string
 }
@@ -28,7 +27,7 @@ const SignupForm = () => {
   }
 
   useEffect(() => {
-    setFocus('id')
+    setFocus('email')
   }, [setFocus])
 
   return (
@@ -37,15 +36,15 @@ const SignupForm = () => {
       {/* Register Form */}
       <S.Form onSubmit={handleSubmit(onSubmit)}>
         <S.SignupBox>
-          <S.SignupFormLabel htmlFor="id">아이디</S.SignupFormLabel>
+          <S.SignupFormLabel htmlFor="email">이메일</S.SignupFormLabel>
           <S.SignupFormInput
-            {...register('id')}
-            type="text"
+            {...register('email')}
+            type="email"
             autoComplete="off"
-            placeholder="아이디를 입력 해주세요"
-            inputColor={errors.id ? '#F03A5F' : '#BAB7C3'}
+            placeholder="이메일을 입력 해주세요"
+            inputColor={errors.password ? '#F03A5F' : '#BAB7C3'}
           />
-          <S.ErrorMessage>{errors?.id?.message}</S.ErrorMessage>
+          <S.ErrorMessage>{errors?.email?.message}</S.ErrorMessage>
         </S.SignupBox>
         <S.SignupBox>
           <S.SignupFormLabel htmlFor="password">비밀번호</S.SignupFormLabel>
@@ -72,24 +71,13 @@ const SignupForm = () => {
         <S.SignupBox>
           <S.SignupFormLabel htmlFor="nickName">닉네임</S.SignupFormLabel>
           <S.SignupFormInput
-            {...register('nickName')}
+            {...register('nickname')}
             type="text"
             autoComplete="off"
             placeholder="닉네임을 입력 해주세요"
-            inputColor={errors.nickName ? '#F03A5F' : '#BAB7C3'}
+            inputColor={errors.nickname ? '#F03A5F' : '#BAB7C3'}
           />
-          <S.ErrorMessage>{errors?.nickName?.message}</S.ErrorMessage>
-        </S.SignupBox>
-        <S.SignupBox>
-          <S.SignupFormLabel htmlFor="email">이메일</S.SignupFormLabel>
-          <S.SignupFormInput
-            {...register('email')}
-            type="email"
-            autoComplete="off"
-            placeholder="이메일을 입력 해주세요"
-            inputColor={errors.password ? '#F03A5F' : '#BAB7C3'}
-          />
-          <S.ErrorMessage>{errors?.email?.message}</S.ErrorMessage>
+          <S.ErrorMessage>{errors?.nickname?.message}</S.ErrorMessage>
         </S.SignupBox>
         <S.SignupBox>
           <S.SignupButton type="submit">가입하기</S.SignupButton>

@@ -8,8 +8,8 @@ import ModalPortal from '@components/Common/Modal/ModalPortal'
 import Modal from '@components/Common/Modal/Modal'
 
 interface LoginFormType {
-  id?: string
-  password?: string
+  email: string
+  password: string
 }
 
 const LoginForm = () => {
@@ -30,15 +30,15 @@ const LoginForm = () => {
 
   const onSubmit = (data: LoginFormType) => {
     console.log(data)
-    const { id, password } = data
+    const { email, password } = data
 
-    if (id && password) {
+    if (email && password) {
       onToggleModal()
     }
   }
 
   useEffect(() => {
-    setFocus('id')
+    setFocus('email')
   }, [setFocus])
 
   return (
@@ -47,13 +47,13 @@ const LoginForm = () => {
       {/* Login Form */}
       <S.Form onSubmit={handleSubmit(onSubmit)}>
         <S.LoginInput
-          {...register('id', {
+          {...register('email', {
             required: true,
           })}
           type="text"
-          placeholder="아이디"
+          placeholder="이메일"
           autoComplete="off"
-          inputColor={errors.id ? '#F03A5F' : '#BAB7C3'}
+          inputColor={errors.email ? '#F03A5F' : '#BAB7C3'}
         />
         <S.LoginInput
           {...register('password', {
