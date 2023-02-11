@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import { NAVER_CLIENT_ID, NAVER_CLIENT_SECRET } from '@lib/api/config'
+import { API_SERVER } from '@lib/api/config'
 
 interface ParamsType {
   query?: string
@@ -10,16 +10,14 @@ interface ParamsType {
 }
 
 export const apiClient: AxiosInstance = axios.create({
-  headers: {
-    'X-Naver-Client-Id': NAVER_CLIENT_ID,
-    'X-Naver-Client-Secret': NAVER_CLIENT_SECRET,
-  },
+  baseURL: API_SERVER,
+  headers: {},
 })
 
 export const FETCH_SEARCH_BOOKS = (params: ParamsType) => {
-  return apiClient.get('/api/v1/search/book.json', { params })
+  return apiClient.get(`${API_SERVER}/books/search`, { params })
 }
 
 export const FETCH_SEARCH_DETAIL_BOOK = (params: ParamsType) => {
-  return apiClient.get('/api/v1/search/book_adv.xml', { params })
+  return apiClient.get(`${API_SERVER}/books/search/${params.d_isbn}`)
 }

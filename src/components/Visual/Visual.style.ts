@@ -19,7 +19,7 @@ export const VisualTitleBox = tw.div`
   flex flex-col
 `
 export const VisualTitle = tw.h1`
-  text-xl font-bold mb-1
+  text-xl font-bold mt-3 mb-1
   sm:text-2xl
 `
 export const VisualSubTitle = tw.p`
