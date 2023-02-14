@@ -1,19 +1,20 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useCookies } from 'react-cookie'
+import { USER_LOGIN } from '@lib/api/apiClient'
+import { LoginFormType } from '@type/formType'
 import * as S from '@components/Login/LoginForm.style'
 import KakaoIcon from '@assets/images/kakao_icon.svg'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import Modal from '@components/Common/Modal/Modal'
 
-interface LoginFormType {
-  email: string
-  password: string
-}
-
 const LoginForm = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>()
+  const [cookies, setCookie] = useCookies(['refreshToken'])
+  const router = useRouter()
 
   const onToggleModal = () => {
     setIsOpenModal((prev) => !prev)
@@ -22,17 +23,23 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setFocus,
+    formState: { errors },
   } = useForm<LoginFormType>({
     mode: 'onChange',
   })
 
-  const onSubmit = (data: LoginFormType) => {
-    console.log(data)
-    const { email, password } = data
+  const onSubmit = async (data: LoginFormType) => {
+    try {
+      const result = await USER_LOGIN(data)
+      const { accessToken, refreshToken } = result.data
 
-    if (email && password) {
+      // Refresh Token Set Cookies
+      setCookie('refreshToken', refreshToken)
+      localStorage.setItem('accessToken', JSON.stringify(accessToken))
+
+      router.push('/')
+    } catch (err) {
       onToggleModal()
     }
   }
@@ -80,7 +87,7 @@ const LoginForm = () => {
       {/* Modal */}
       {isOpenModal && (
         <ModalPortal>
-          <Modal onToggleModal={onToggleModal}>아이디 혹은 비밀번호를 확인 해주세요.</Modal>
+          <Modal onToggleModal={onToggleModal}>이메일 혹은 비밀번호를 확인 해주세요.</Modal>
         </ModalPortal>
       )}
     </S.LoginWrapper>

@@ -4,7 +4,7 @@ import { debounce } from 'lodash'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from '@utils/signupValidationSchema'
-import { SignUpFormType } from '@type/signUpForm'
+import { SignUpFormType } from '@type/formType'
 import { USER_EMAIL_CHECK, USER_SIGN_UP } from '@lib/api/apiClient'
 import Modal from '@components/Common/Modal/Modal'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
@@ -23,7 +23,7 @@ const SignupForm = () => {
     setFocus,
     formState: { errors },
   } = useForm<SignUpFormType>({
-    mode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(schema),
   })
 
@@ -90,7 +90,6 @@ const SignupForm = () => {
 
     return () => {
       clearTimeout(timerRef.current as NodeJS.Timeout)
-      console.log('삭제')
     }
   }, [])
 

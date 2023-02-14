@@ -2,7 +2,7 @@ import tw from 'twin.macro'
 
 export const VisualWrapper = tw.section`
   w-full flex justify-center items-center
-  p-7 mt-3 mb-10
+  p-7 mt-3 mb-5
 `
 export const VisualBox = tw.div`
   flex flex-col justify-between 

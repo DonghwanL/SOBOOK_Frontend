@@ -4,3 +4,8 @@ export interface SignUpFormType {
   password?: string
   confirmPassword?: string
 }
+
+export interface LoginFormType {
+  email: string
+  password: string
+}
