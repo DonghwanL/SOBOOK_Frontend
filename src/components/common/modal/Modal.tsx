@@ -62,7 +62,7 @@ const Content = tw.div`
 `
 
 const ContentFooter = tw.div`
-  flex justify-end mt-5 p-2 mt-5
+  flex justify-center mt-5 p-2 mt-10
 `
 
 const CloseButton = tw.button`

@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { searchKeywordState, startPageState, activedPageState } from '@/src/lib/store'
-import Modal from '../Common/Modal/Modal'
-import ModalPortal from '../Common/Modal/ModalPortal'
+import Modal from '@components/Common/Modal/Modal'
+import ModalPortal from '@components/Common/Modal/ModalPortal'
 import * as S from '@components/Search/SearchBar.style'
 
 type SearchBarProps = {
