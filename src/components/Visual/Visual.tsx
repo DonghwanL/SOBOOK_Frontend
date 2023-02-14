@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react'
-import { lottie } from '@assets/lottie'
+import { lottie_visual } from '@assets/lottie'
 import * as S from '@components/Visual/Visual.style'
 
 const Visual = () => {
@@ -11,7 +11,7 @@ const Visual = () => {
             <S.VisualTitle>나만의 작은 서재</S.VisualTitle>
             <S.VisualSubTitle>독서 기록 및 통계까지 한번에 확인 하세요!</S.VisualSubTitle>
           </S.VisualTitleBox>
-          <Lottie animationData={lottie} style={lottieStyle} />
+          <Lottie animationData={lottie_visual} style={lottieStyle} />
         </S.VisualContent>
       </S.VisualBox>
     </S.VisualWrapper>

@@ -16,8 +16,8 @@ export const HeaderNav = tw.nav`
   hidden sm:flex justify-center items-center 
 `
 export const MenuContainer = tw.div`
-flex flex-col`
-
+  flex flex-col
+`
 export const MobileMenuBtn = tw.button`
   flex sm:hidden cursor-pointer
 `
