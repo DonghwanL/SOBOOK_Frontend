@@ -1,15 +1,28 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { removeCookie } from '@/src/utils/cookie'
+import { useRecoilState } from 'recoil'
+import { isLoginedState } from '@/src/lib/store'
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import ThemeToggler from '@components/Common/ThemeToggler'
 import * as S from '@components/Layout/Header.style'
 
 const Header = () => {
-  const isLogined = false
+  const router = useRouter()
+  const [isLogined, setIsLogined] = useRecoilState(isLoginedState)
   const [isToggleMenu, setIsToggleMenu] = useState(false)
 
   const onClickMobileToggle = () => {
     setIsToggleMenu((prev) => !prev)
+  }
+
+  const onClickLogOut = () => {
+    removeCookie('refreshToken')
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('nickname')
+    setIsLogined(false)
+    router.push('/')
   }
 
   return (
@@ -30,7 +43,7 @@ const Header = () => {
               <Link href="/bookShelf">
                 <S.ButtonStyle>내서재</S.ButtonStyle>
               </Link>
-              <S.ButtonStyle>로그아웃</S.ButtonStyle>
+              <S.ButtonStyle onClick={onClickLogOut}>로그아웃</S.ButtonStyle>
             </>
           )}
           <ThemeToggler />
@@ -51,7 +64,9 @@ const Header = () => {
               <Link href="/bookShelf">
                 <S.ButtonStyle mobile={true}>내서재</S.ButtonStyle>
               </Link>
-              <S.ButtonStyle mobile={true}>로그아웃</S.ButtonStyle>
+              <S.ButtonStyle mobile={true} onClick={onClickLogOut}>
+                로그아웃
+              </S.ButtonStyle>
             </S.MenuContainer>
           )}
           <S.ThemeTogglerWrapper>

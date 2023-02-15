@@ -1,6 +1,12 @@
 import { atom } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
 
+// Login
+export const isLoginedState = atom({
+  key: `isLoginedState/${uuidv4()}`,
+  default: false,
+})
+
 // Fetch Data
 export const bookListState = atom({
   key: `bookListState/${uuidv4()}`,

@@ -24,6 +24,7 @@ export const MobileMenuBtn = tw.button`
 export const MobileMenuWrapper = tw.div`
   flex flex-col sm:hidden text-center p-5
   bg-gray-100 dark:bg-gray-300
+  animate-fade-in-down
 `
 export const ThemeTogglerWrapper = tw.div`
   flex justify-center
@@ -32,7 +33,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   ${tw`text-indigo-700 font-bold`}
 
   margin-right: ${(props) => (props.mobile ? '0px' : '16px')};
-  margin-bottom: ${(props) => (props.mobile ? '10px' : '0px')};
+  margin-bottom: ${(props) => (props.mobile ? '12px' : '0px')};
 
   &:hover {
     text-decoration: ${(props) => (props.mobile ? 'none' : 'underline')};

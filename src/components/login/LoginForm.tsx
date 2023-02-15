@@ -3,9 +3,11 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useCookies } from 'react-cookie'
+import { useSetRecoilState } from 'recoil'
+import { isLoginedState } from '@lib/store'
 import { USER_LOGIN } from '@lib/api/apiClient'
-import { LoginFormType } from '@type/formType'
+import { LoginFormType } from '@type/formType.type'
+import { setCookie } from '@utils/cookie'
 import * as S from '@components/Login/LoginForm.style'
 import KakaoIcon from '@assets/images/kakao_icon.svg'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
@@ -13,7 +15,7 @@ import Modal from '@components/Common/Modal/Modal'
 
 const LoginForm = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>()
-  const [cookies, setCookie] = useCookies(['refreshToken'])
+  const setIsLogined = useSetRecoilState(isLoginedState)
   const router = useRouter()
 
   const onToggleModal = () => {
@@ -32,12 +34,13 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormType) => {
     try {
       const result = await USER_LOGIN(data)
-      const { accessToken, refreshToken } = result.data
+      const { access_token, refresh_token, nickname } = result.data
 
-      // Refresh Token Set Cookies
-      setCookie('refreshToken', refreshToken)
-      localStorage.setItem('accessToken', JSON.stringify(accessToken))
-
+      // Set Token
+      setCookie('refreshToken', refresh_token)
+      localStorage.setItem('accessToken', JSON.stringify(access_token))
+      localStorage.setItem('nickname', JSON.stringify(nickname))
+      setIsLogined(true)
       router.push('/')
     } catch (err) {
       onToggleModal()
