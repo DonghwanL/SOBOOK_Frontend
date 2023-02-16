@@ -1,5 +1,8 @@
+import withAuth from '@/src/hocs/withAuth'
+import BookShelfList from '@components/BookShelf/List/BookShelfList'
+
 const BookShelfPage = () => {
-  return <div>ss</div>
+  return <BookShelfList />
 }
 
-export default BookShelfPage
+export default withAuth(BookShelfPage)

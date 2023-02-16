@@ -2,6 +2,10 @@ import tw from 'twin.macro'
 import styled from '@emotion/styled'
 import { MdArrowBackIosNew } from 'react-icons/md'
 
+interface BookDetailStyleProps {
+  disableState: boolean
+}
+
 export const BookDetailWrapper = tw.section`
   flex flex-col justify-center items-center mt-5 mx-auto
   w-full md:w-4/5 lg:w-4/5 xl:w-3/5 2xl:w-3/5
@@ -37,9 +41,11 @@ export const NaverLinkBtn = tw.button`
   font-bold text-xs text-white mb-8
 `
 
-export const AddLibraryBtn = tw.button`
-  bg-indigo-400 rounded-md p-2 hover:bg-indigo-500
-  font-bold text-xs text-white mb-8 mr-3
+export const AddLibraryBtn = styled.button<BookDetailStyleProps>`
+  ${tw`bg-indigo-400 rounded-md p-2 hover:bg-indigo-500
+  font-bold text-xs text-white mb-8 mr-3`}
+
+  cursor: ${(props) => (props.disableState ? 'not-allowed' : 'pointer')};
 `
 
 export const BookDetailInfoWrapper = tw.div`

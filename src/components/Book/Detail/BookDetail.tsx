@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
@@ -23,8 +23,8 @@ interface BookDetailProps {
 const BookDetail = ({ data }: BookDetailProps) => {
   const router = useRouter()
   const [limit, setLimit] = useState(350)
+  const [isDisabled, setIsDisabled] = useState(true)
 
-  // 뒤로 가기
   const onClickBackBtn = () => {
     router.back()
   }
@@ -41,6 +41,11 @@ const BookDetail = ({ data }: BookDetailProps) => {
       isShowMore: str.length > limit,
     }
   }
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    if (accessToken) setIsDisabled(false)
+  })
 
   return (
     <S.BookDetailWrapper key={data.isbn}>
@@ -66,7 +71,9 @@ const BookDetail = ({ data }: BookDetailProps) => {
       <S.BookDetailTitle>{data.title}</S.BookDetailTitle>
       <S.BookDetailAuthor>{data.author.replaceAll('^', ', ')}</S.BookDetailAuthor>
       <S.BookDetailButtonGroup>
-        <S.AddLibraryBtn>서재에 담기</S.AddLibraryBtn>
+        <S.AddLibraryBtn disabled={isDisabled} disableState={isDisabled}>
+          서재에 담기
+        </S.AddLibraryBtn>
         <Link href={data.link} rel="noopener noreferrer" target="_blank">
           <S.NaverLinkBtn>네이버 페이지 이동</S.NaverLinkBtn>
         </Link>

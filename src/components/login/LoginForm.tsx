@@ -33,7 +33,7 @@ const LoginForm = () => {
       const result = await USER_LOGIN(data)
       const { access_token, refresh_token, nickname } = result.data
 
-      // Set Token
+      // Set Token & User Info
       setCookie('refreshToken', refresh_token)
       localStorage.setItem('accessToken', access_token)
       localStorage.setItem('userInfo', nickname)

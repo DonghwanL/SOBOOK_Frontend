@@ -13,8 +13,8 @@ const Header = () => {
   const [isToggleMenu, setIsToggleMenu] = useState(false)
 
   useEffect(() => {
-    const userInfo = localStorage.getItem('userInfo')
-    if (userInfo) setIsLogined(true)
+    const accessToken = localStorage.getItem('accessToken')
+    if (accessToken) setIsLogined(true)
   })
 
   const onClickMobileToggle = () => {
