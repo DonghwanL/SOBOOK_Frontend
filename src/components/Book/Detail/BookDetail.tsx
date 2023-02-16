@@ -3,8 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { CREATE_BOOK_SHELF } from '@lib/api/apiClient'
+import { CreateShelfType } from '@type/index'
 import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
+import ModalPortal from '@components/Common/Modal/ModalPortal'
+import Modal from '@components/Common/Modal/Modal'
 
 interface BookDetailProps {
   data: {
@@ -24,6 +28,16 @@ const BookDetail = ({ data }: BookDetailProps) => {
   const router = useRouter()
   const [limit, setLimit] = useState(350)
   const [isDisabled, setIsDisabled] = useState(true)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    if (accessToken) setIsDisabled(false)
+  })
+
+  const onToggleModal = () => {
+    setIsOpenModal((prev) => !prev)
+  }
 
   const onClickBackBtn = () => {
     router.back()
@@ -42,10 +56,23 @@ const BookDetail = ({ data }: BookDetailProps) => {
     }
   }
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken')
-    if (accessToken) setIsDisabled(false)
-  })
+  // 서재 등록
+  const onClickCreateBtn = async () => {
+    const createData: CreateShelfType = {
+      title: data.title,
+      image: data.image,
+      author: data.author,
+      publisher: data.publisher,
+      pubdate: data.pubdate,
+    }
+
+    try {
+      await CREATE_BOOK_SHELF(createData)
+      setIsOpenModal(true)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <S.BookDetailWrapper key={data.isbn}>
@@ -71,7 +98,7 @@ const BookDetail = ({ data }: BookDetailProps) => {
       <S.BookDetailTitle>{data.title}</S.BookDetailTitle>
       <S.BookDetailAuthor>{data.author.replaceAll('^', ', ')}</S.BookDetailAuthor>
       <S.BookDetailButtonGroup>
-        <S.AddLibraryBtn disabled={isDisabled} disableState={isDisabled}>
+        <S.AddLibraryBtn disabled={isDisabled} disableState={isDisabled} onClick={onClickCreateBtn}>
           서재에 담기
         </S.AddLibraryBtn>
         <Link href={data.link} rel="noopener noreferrer" target="_blank">
@@ -100,6 +127,12 @@ const BookDetail = ({ data }: BookDetailProps) => {
           </S.DescriptionMoreBtn>
         )}
       </S.BookDetailDescription>
+      {/* Modal */}
+      {isOpenModal && (
+        <ModalPortal>
+          <Modal onToggleModal={onToggleModal}>서재에 등록 되었습니다.</Modal>
+        </ModalPortal>
+      )}
     </S.BookDetailWrapper>
   )
 }
