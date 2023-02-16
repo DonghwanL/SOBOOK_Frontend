@@ -1,28 +1,37 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { USER_LOGOUT } from '@lib/api/apiClient'
 import { removeCookie } from '@/src/utils/cookie'
-import { useRecoilState } from 'recoil'
-import { isLoginedState } from '@/src/lib/store'
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import ThemeToggler from '@components/Common/ThemeToggler'
 import * as S from '@components/Layout/Header.style'
 
 const Header = () => {
   const router = useRouter()
-  const [isLogined, setIsLogined] = useRecoilState(isLoginedState)
+  const [isLogined, setIsLogined] = useState(false)
   const [isToggleMenu, setIsToggleMenu] = useState(false)
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem('userInfo')
+    if (userInfo) setIsLogined(true)
+  })
 
   const onClickMobileToggle = () => {
     setIsToggleMenu((prev) => !prev)
   }
 
-  const onClickLogOut = () => {
-    removeCookie('refreshToken')
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('nickname')
-    setIsLogined(false)
-    router.push('/')
+  const onClickLogOut = async () => {
+    try {
+      await USER_LOGOUT()
+      removeCookie('refreshToken')
+      localStorage.removeItem('accessToken')
+      localStorage.removeItem('userInfo')
+      setIsLogined(false)
+      router.push('/')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

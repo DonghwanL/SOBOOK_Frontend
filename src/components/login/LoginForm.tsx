@@ -3,8 +3,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSetRecoilState } from 'recoil'
-import { isLoginedState } from '@lib/store'
 import { USER_LOGIN } from '@lib/api/apiClient'
 import { LoginFormType } from '@type/formType.type'
 import { setCookie } from '@utils/cookie'
@@ -15,7 +13,6 @@ import Modal from '@components/Common/Modal/Modal'
 
 const LoginForm = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>()
-  const setIsLogined = useSetRecoilState(isLoginedState)
   const router = useRouter()
 
   const onToggleModal = () => {
@@ -38,9 +35,8 @@ const LoginForm = () => {
 
       // Set Token
       setCookie('refreshToken', refresh_token)
-      localStorage.setItem('accessToken', JSON.stringify(access_token))
-      localStorage.setItem('nickname', JSON.stringify(nickname))
-      setIsLogined(true)
+      localStorage.setItem('accessToken', access_token)
+      localStorage.setItem('userInfo', nickname)
       router.push('/')
     } catch (err) {
       onToggleModal()

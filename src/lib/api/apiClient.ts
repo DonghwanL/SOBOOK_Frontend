@@ -81,3 +81,7 @@ export const USER_EMAIL_CHECK = (param: SignUpFormType) => {
 export const USER_LOGIN = (data: LoginFormType) => {
   return apiClient.post(`${API_SERVER}/api/auth/login`, data)
 }
+
+export const USER_LOGOUT = () => {
+  return apiClient.post(`${API_SERVER}/api/auth/logout`)
+}
