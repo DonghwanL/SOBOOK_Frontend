@@ -12,6 +12,11 @@ export const bookDetailState = atom({
   default: [],
 })
 
+export const bookShelfListState = atom({
+  key: `bookShelfListState/${uuidv4()}`,
+  default: [],
+})
+
 // Search & Pagination
 export const searchKeywordState = atom({
   key: `searchKeywordState/${uuidv4()}`,

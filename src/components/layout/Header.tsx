@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { USER_LOGOUT } from '@lib/api/apiClient'
+import { USER_LOGOUT } from '@lib/api/user'
 import { removeCookie } from '@/src/utils/cookie'
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import ThemeToggler from '@components/Common/ThemeToggler'

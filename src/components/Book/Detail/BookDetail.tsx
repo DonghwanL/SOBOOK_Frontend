@@ -3,26 +3,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { CREATE_BOOK_SHELF } from '@lib/api/apiClient'
-import { CreateShelfType } from '@type/index'
+import { CREATE_BOOK_SHELF } from '@lib/api/bookShelf'
+import { BookDetailProps, CreateShelfType } from '@type/index'
 import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import Modal from '@components/Common/Modal/Modal'
-
-interface BookDetailProps {
-  data: {
-    title: string
-    description: string
-    image: string
-    author: string
-    publisher: string
-    pubdate: string
-    isbn: string
-    link: string
-  }
-  key: string
-}
 
 const BookDetail = ({ data }: BookDetailProps) => {
   const router = useRouter()

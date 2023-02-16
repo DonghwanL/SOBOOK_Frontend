@@ -1,22 +1,11 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { BookItemProps } from '@type/bookLists.type'
 import * as S from '@components/Book/ListItem/BookListItems.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
-interface BookListProps {
-  data: {
-    title: string
-    image: string
-    author: string
-    publisher: string
-    pubdate: string
-    isbn: string
-  }
-  key: string
-}
-
-const BookListItems = ({ data }: BookListProps) => {
+const BookListItems = ({ data }: BookItemProps) => {
   const router = useRouter()
 
   const onClickDetailBook = (id: string) => () => {

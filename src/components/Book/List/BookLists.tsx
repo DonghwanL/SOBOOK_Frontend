@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { searchKeywordState, bookListState } from '@lib/store'
-import { FETCH_SEARCH_BOOKS } from '@lib/api/apiClient'
+import { FETCH_SEARCH_BOOKS } from '@lib/api/books'
 import { BookListsType } from '@type/bookLists.type'
 import * as S from '@components/Book/List/BookLists.style'
 import SearchBar from '@components/Search/SearchBar'
