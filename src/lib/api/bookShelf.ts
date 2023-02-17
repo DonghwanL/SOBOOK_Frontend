@@ -9,3 +9,8 @@ export const CREATE_BOOK_SHELF = (data: CreateShelfType) => {
 export const FETCH_BOOK_SHELF_LIST = () => {
   return apiClient.get(`${API_SERVER}/api/bookShelf`)
 }
+
+export const FETCH_BOOK_SHELF_DETAIL = (params: number) => {
+  console.log(params)
+  return apiClient.get(`${API_SERVER}/api/bookShelf/${params}`)
+}

@@ -1,4 +1,4 @@
-import withAuth from '@/src/hocs/withAuth'
+import withAuth from '@hocs/withAuth'
 import BookShelfList from '@components/BookShelf/List/BookShelfList'
 
 const BookShelfPage = () => {

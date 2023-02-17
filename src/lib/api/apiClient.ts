@@ -62,8 +62,8 @@ const getRefreshToken = mem(async (): Promise<string | void> => {
     const { access_token, refresh_token, nickname } = result.data
 
     setCookie('refreshToken', refresh_token)
-    localStorage.setItem('accessToken', JSON.stringify(access_token))
-    localStorage.setItem('nickname', JSON.stringify(nickname))
+    localStorage.setItem('accessToken', access_token)
+    localStorage.setItem('nickname', nickname)
 
     return access_token
   } catch (e) {
