@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { bookShelfDetailState } from '@lib/store'
 import { FETCH_BOOK_SHELF_DETAIL } from '@lib/api/bookShelf'
+// import { BookShelfType } from '@type/index'
+import BookShelfDetail from '@components/BookShelf/Detail/BookShelfDetail'
 import withAuth from '@hocs/withAuth'
 
 const BookShelfDetailPage = () => {
@@ -11,7 +13,10 @@ const BookShelfDetailPage = () => {
   const [detailBookShelf, setDetailBookShelf] = useRecoilState(bookShelfDetailState)
 
   useEffect(() => {
-    if (router.isReady) fetchDetailBookShelf()
+    if (router.isReady) {
+      // setDetailBookShelf([])
+      fetchDetailBookShelf()
+    }
   }, [router.isReady])
 
   const fetchDetailBookShelf = async () => {
@@ -19,7 +24,7 @@ const BookShelfDetailPage = () => {
     setDetailBookShelf(response.data)
   }
 
-  return <div></div>
+  return <BookShelfDetail data={detailBookShelf} />
 }
 
 export default withAuth(BookShelfDetailPage)

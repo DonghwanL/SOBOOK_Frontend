@@ -11,6 +11,5 @@ export const FETCH_BOOK_SHELF_LIST = () => {
 }
 
 export const FETCH_BOOK_SHELF_DETAIL = (params: number) => {
-  console.log(params)
   return apiClient.get(`${API_SERVER}/api/bookShelf/${params}`)
 }

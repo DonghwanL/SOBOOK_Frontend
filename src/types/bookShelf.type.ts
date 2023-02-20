@@ -38,5 +38,4 @@ export interface BookShelfItemProps {
     createdAt: Date
     updateAt: Date
   }
-  key: string
 }
