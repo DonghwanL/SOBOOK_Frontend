@@ -116,7 +116,7 @@ const BookDetail = ({ data }: BookDetailProps) => {
       {/* Modal */}
       {isOpenModal && (
         <ModalPortal>
-          <Modal onToggleModal={onToggleModal}>서재에 등록 되었습니다.</Modal>
+          <Modal onToggleModal={onToggleModal} contents="서재에 등록 되었습니다." />
         </ModalPortal>
       )}
     </S.BookDetailWrapper>

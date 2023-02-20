@@ -52,7 +52,7 @@ const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
       {/* Modal */}
       {isOpenModal && (
         <ModalPortal>
-          <Modal onToggleModal={onToggleModal}>검색어를 입력 해주세요!</Modal>
+          <Modal onToggleModal={onToggleModal} contents="검색어를 입력 해주세요!" />
         </ModalPortal>
       )}
     </S.SearchWrapper>

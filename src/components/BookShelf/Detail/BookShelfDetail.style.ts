@@ -1,5 +1,7 @@
 import tw from 'twin.macro'
 import styled from '@emotion/styled'
+import { BiEdit } from 'react-icons/bi'
+import { RiDeleteBinLine } from 'react-icons/ri'
 import { MdArrowBackIosNew } from 'react-icons/md'
 
 type BookShelfDetailStyleProps = {
@@ -29,39 +31,61 @@ export const BookShelfDetailInfoWrapper = tw.div`
   sm:flex-row
 `
 
-export const BookShelfDetailImage = tw.div`
+export const DetailImage = tw.div`
   rounded-lg shadow-md h-auto overflow-hidden
   w-2/5 mb-5 sm:w-1/5 xl:w-1/6 sm:mr-10
 `
 
 export const BookShelfDetailInfo = tw.div`
-  flex flex-col items-center p-3
+  flex flex-col flex-1 items-center p-3
   sm:items-start
 `
 
-export const BookShelfDetailTitle = tw.h1`
+export const DetailTitle = tw.h1`
   font-bold md:text-lg mb-2
 `
 
-export const BookShelfDetailAuthor = tw.p`
+export const DetailAuthor = tw.p`
   mb-2 text-sm
 `
 
-export const BookShelfDetailPublisher = tw.p`
+export const DetailPublisher = tw.p`
   mb-3 text-sm
 `
 
-export const BookShelfStatus = styled.span<BookShelfDetailStyleProps>`
+export const DetailStatus = styled.span<BookShelfDetailStyleProps>`
   ${tw`mb-3 p-2 rounded-lg text-xs text-white font-bold cursor-pointer`}
   background-color: ${(props) => (props.status === 'READING' ? '#e17055' : '#2ecc71')};
 `
 
-export const BookShelfContent = tw.div`
-  flex justify-center my-5 p-5 w-full h-[230px] max-h-[230px] overflow-auto
+export const DetailBtnGroup = tw.div`
+  w-full flex justify-end px-5
 `
 
+export const EditIcon = styled(BiEdit)`
+  ${tw`
+     text-xl text-gray-400 font-bold cursor-pointer mr-5
+     sm:text-2xl md:ml-0
+     hover:font-extrabold hover:text-indigo-500
+  `}
+`
+
+export const DeleteIcon = styled(RiDeleteBinLine)`
+  ${tw`
+     text-xl text-gray-400 font-bold cursor-pointer
+     sm:text-2xl md:ml-0
+     hover:font-extrabold hover:text-indigo-500
+  `}
+`
+
+export const BookShelfContentWrapper = tw.div`
+  flex justify-center mb-10 p-5 w-full h-[230px] max-h-[230px] overflow-auto
+`
+
+export const DetailContents = tw.div``
+
 export const BookShelfEditorWrapper = styled.div`
-  ${tw`my-5 p-5 w-full`}
+  ${tw`mb-5 p-5 w-full flex flex-col justify-center`}
 
   .ql-editor {
     height: 250px;
@@ -70,6 +94,12 @@ export const BookShelfEditorWrapper = styled.div`
   }
 `
 
-export const BookShelfEmptyContents = tw.div`
-  flex justify-center items-center font-bold
+export const EditBtn = tw.button`
+  bg-indigo-800 text-white mt-5 p-3
+  opacity-80 hover:opacity-100 hover:font-semibold
+`
+
+export const DetailEmptyContents = tw.div`
+  w-full flex justify-center items-center p-5  
+  border rounded-md font-semibold
 `

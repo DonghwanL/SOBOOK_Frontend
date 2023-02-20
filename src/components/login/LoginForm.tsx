@@ -86,7 +86,7 @@ const LoginForm = () => {
       {/* Modal */}
       {isOpenModal && (
         <ModalPortal>
-          <Modal onToggleModal={onToggleModal}>이메일 혹은 비밀번호를 확인 해주세요.</Modal>
+          <Modal onToggleModal={onToggleModal} contents="이메일 혹은 비밀번호를 확인 해주세요." />
         </ModalPortal>
       )}
     </S.LoginWrapper>

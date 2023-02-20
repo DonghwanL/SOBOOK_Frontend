@@ -150,7 +150,7 @@ const SignupForm = () => {
       {/* Modal */}
       {isOpenModal && (
         <ModalPortal>
-          <Modal onToggleModal={onToggleModal}>회원 가입이 완료 되었습니다.</Modal>
+          <Modal onToggleModal={onToggleModal} contents="회원 가입이 완료 되었습니다." />
         </ModalPortal>
       )}
     </S.SignupWrapper>

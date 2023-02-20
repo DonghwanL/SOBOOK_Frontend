@@ -31,7 +31,7 @@ const BookShelfItems = ({ data }: BookShelfItemProps) => {
       </S.BookShelfImage>
       <S.BookShelfStatus status={data.status}>{data.status}</S.BookShelfStatus>
       <S.BookShelfTitle>{data.title}</S.BookShelfTitle>
-      <S.BookShelfAuthor>{data.author}</S.BookShelfAuthor>
+      <S.BookShelfAuthor>{data.author.replaceAll('^', ', ')}</S.BookShelfAuthor>
     </S.BookShelfItems>
   )
 }

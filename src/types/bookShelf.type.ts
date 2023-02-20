@@ -6,6 +6,13 @@ export interface CreateShelfType {
   pubdate: string
 }
 
+export interface UpdateShelfType {
+  id: number
+  rating: number
+  status: string
+  memo: string
+}
+
 export interface BookShelfType {
   id: number
   title: string

@@ -4,11 +4,13 @@ import useOnClickOutside from '@hooks/useOutSideClick'
 import useKeyEscClose from '@hooks/useKeyEscClose'
 
 interface ModalProps {
-  children: React.ReactNode
+  isConfirm?: boolean
+  contents: string
   onToggleModal?: () => void
+  onConfirmModal?: () => void
 }
 
-const Modal = ({ children, onToggleModal }: ModalProps) => {
+const Modal = ({ contents, isConfirm = false, onToggleModal, onConfirmModal }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null)
 
   const onClickClose = () => {
@@ -39,9 +41,16 @@ const Modal = ({ children, onToggleModal }: ModalProps) => {
     <BackDrop>
       <ContentWrapper ref={modalRef}>
         <Content>
-          {children}
+          {contents}
           <ContentFooter>
-            <CloseButton onClick={onClickClose}>확인</CloseButton>
+            {isConfirm ? (
+              <>
+                <ConfirmSButton onClick={onConfirmModal}>확인</ConfirmSButton>
+                <ConfirmCButton onClick={onClickClose}>취소</ConfirmCButton>
+              </>
+            ) : (
+              <CloseButton onClick={onClickClose}>확인</CloseButton>
+            )}
           </ContentFooter>
         </Content>
       </ContentWrapper>
@@ -67,6 +76,14 @@ const ContentFooter = tw.div`
 
 const CloseButton = tw.button`
   font-bold text-indigo-600
+`
+
+const ConfirmSButton = tw.button`
+  font-bold text-indigo-600 mr-10
+`
+
+const ConfirmCButton = tw.button`
+  font-bold text-red-500
 `
 
 export default Modal
