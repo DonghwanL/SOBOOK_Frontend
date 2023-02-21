@@ -1,30 +1,34 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { bookShelfDetailState } from '@lib/store'
 import { FETCH_BOOK_SHELF_DETAIL } from '@lib/api/bookShelf'
-// import { BookShelfType } from '@type/index'
 import BookShelfDetail from '@components/BookShelf/Detail/BookShelfDetail'
 import withAuth from '@hocs/withAuth'
 
 const BookShelfDetailPage = () => {
   const router = useRouter()
   const [isFetch, setIsFetch] = useState(false)
-  const [detailBookShelf, setDetailBookShelf] = useRecoilState(bookShelfDetailState)
+  const setDetailBookShelf = useSetRecoilState(bookShelfDetailState)
 
   useEffect(() => {
     if (router.isReady) {
-      // setDetailBookShelf([])
       fetchDetailBookShelf()
     }
   }, [router.isReady])
 
   const fetchDetailBookShelf = async () => {
-    const response = await FETCH_BOOK_SHELF_DETAIL(Number(router.query.id))
-    setDetailBookShelf(response.data)
+    try {
+      setIsFetch(false)
+      const response = await FETCH_BOOK_SHELF_DETAIL(Number(router.query.id))
+      setDetailBookShelf(response.data)
+      setIsFetch(true)
+    } catch (err) {
+      console.error('Detail Shelf Fetching Error')
+    }
   }
 
-  return <BookShelfDetail data={detailBookShelf} />
+  return <>{isFetch ? <BookShelfDetail fetchDetailBookShelf={fetchDetailBookShelf} /> : <div></div>}</>
 }
 
 export default withAuth(BookShelfDetailPage)

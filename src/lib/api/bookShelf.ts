@@ -14,8 +14,12 @@ export const CREATE_BOOK_SHELF = (data: CreateShelfType) => {
   return apiClient.post(`${API_SERVER}/api/bookShelf`, data)
 }
 
-export const UPDATE_BOOK_SHELF = (data: UpdateShelfType) => {
-  return apiClient.patch(`${API_SERVER}/api/bookShelf/${data.id}`, data)
+export const UPDATE_BOOK_STATUS = (data: UpdateShelfType) => {
+  return apiClient.patch(`${API_SERVER}/api/bookShelf/status/${data.id}`, data)
+}
+
+export const UPDATE_BOOK_CONTENTS = (data: UpdateShelfType) => {
+  return apiClient.patch(`${API_SERVER}/api/bookShelf/contents/${data.id}`, data)
 }
 
 export const DELETE_BOOK_SHELF = (params: number) => {

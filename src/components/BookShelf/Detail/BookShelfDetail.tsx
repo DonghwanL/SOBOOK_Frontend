@@ -1,31 +1,29 @@
-import dayjs from 'dayjs'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { BookShelfItemProps } from '@type/index'
-import { UPDATE_BOOK_SHELF, DELETE_BOOK_SHELF } from '@lib/api/bookShelf'
+import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { bookShelfDetailState } from '@lib/store'
+import { UPDATE_BOOK_STATUS, UPDATE_BOOK_CONTENTS, DELETE_BOOK_SHELF } from '@lib/api/bookShelf'
 import * as DOMPurify from 'dompurify'
 import * as S from '@components/BookShelf/Detail/BookShelfDetail.style'
+import BookShelfDetailInfo from '@components/BookShelf/Detail/BookShelfDetailInfo'
 import Editor from '@components/Common/Editor/Editor'
-import NoFoundImage from '@assets/images/no-image-found.jpeg'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import Modal from '@components/Common/Modal/Modal'
 
-const BookShelfDetail = ({ data }: BookShelfItemProps) => {
+type BookShelfDetailProps = {
+  fetchDetailBookShelf: () => Promise<void>
+}
+
+const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
   const router = useRouter()
+  const data = useRecoilValue(bookShelfDetailState)
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [status, setStatus] = useState<string>(data.status)
   const [rating, setRating] = useState<number>(0)
-  const [contents, setContents] = useState<string>('')
+  const [contents, setContents] = useState<string>(data.memo)
   let isServer = typeof window === 'undefined' ? false : true
 
-  // 뒤로 가기
-  const onClickBackBtn = () => {
-    router.back()
-  }
-
-  // Modal Toggle
   const onToggleModal = () => {
     setIsOpenModal((prev) => !prev)
   }
@@ -34,21 +32,31 @@ const BookShelfDetail = ({ data }: BookShelfItemProps) => {
     onClickDeleteIcon()
   }
 
-  // State 클릭시 상태 변경
-  const onClickStatus = () => {
-    status === 'READING' ? setStatus('COMPLETE') : setStatus('READING')
+  const onClickStatus = async () => {
+    console.log(data.status)
+    setStatus((status) => (status = 'COMPLETE'))
+    onStateUpdate()
   }
 
-  // 수정 아이콘 클릭
-  const onClickEditIcon = () => {
-    setIsEdit((prev) => !prev)
+  const onStateUpdate = async () => {
+    const updateState = {
+      id: data.id,
+      status,
+    }
 
-    if (isEdit) {
-      setContents('<b>sssssssss</b>')
+    console.log(updateState)
+
+    try {
+      await UPDATE_BOOK_STATUS(updateState)
+    } catch (err) {
+      console.log('Book State Update Failed')
     }
   }
 
-  // 삭제 아이콘 클릭 (해당 서적 삭제)
+  const onClickEditIcon = () => {
+    setIsEdit((prev) => !prev)
+  }
+
   const onClickDeleteIcon = async () => {
     try {
       await DELETE_BOOK_SHELF(data.id)
@@ -58,60 +66,29 @@ const BookShelfDetail = ({ data }: BookShelfItemProps) => {
     }
   }
 
-  // 수정하기 버튼 클릭 (해당 서적 수정)
   const onClickEdit = async () => {
     const updateData = {
       id: data.id,
-      rating: rating ? rating : data.rating,
-      status,
-      memo: contents ? contents : data.memo,
+      memo: contents,
     }
 
     try {
-      const response = await UPDATE_BOOK_SHELF(updateData)
-      router.push(`/bookShelf/${data.id}`)
+      await UPDATE_BOOK_CONTENTS(updateData)
+      fetchDetailBookShelf()
+      setIsEdit(false)
     } catch (err) {
-      console.log('Edit Failed')
+      console.log('Contents Edit Failed')
     }
   }
 
   useEffect(() => {
     setStatus(data.status)
-  }, [data.status])
+    setContents(data.memo)
+  }, [data.status, data.memo])
 
   return (
     <S.BookShelfDetailWrapper>
-      <S.PageBackBtnBox>
-        <S.PageBackBtn onClick={onClickBackBtn} />
-      </S.PageBackBtnBox>
-      <S.BookShelfDetailInfoWrapper>
-        <S.DetailImage>
-          {!data.image && (
-            <Image className="w-full h-auto" src={NoFoundImage} alt="no_found_img" width={0} height={0} sizes="100vw" />
-          )}
-          {data.image && (
-            <Image
-              width={0}
-              height={0}
-              src={data.image}
-              sizes="100vw"
-              priority={true}
-              alt="book_detail_img"
-              className="w-full h-auto"
-            />
-          )}
-        </S.DetailImage>
-        <S.BookShelfDetailInfo>
-          <S.DetailTitle>{data.title}</S.DetailTitle>
-          <S.DetailAuthor>{data.author.replaceAll('^', ', ')}</S.DetailAuthor>
-          <S.DetailPublisher>
-            {data.publisher} / {dayjs(data.pubdate).format('YYYY.MM.DD')}
-          </S.DetailPublisher>
-          <S.DetailStatus onClick={onClickStatus} status={status}>
-            {status}
-          </S.DetailStatus>
-        </S.BookShelfDetailInfo>
-      </S.BookShelfDetailInfoWrapper>
+      <BookShelfDetailInfo status={status} onClickStatus={onClickStatus} />
       <S.DetailBtnGroup>
         <S.EditIcon onClick={onClickEditIcon} />
         <S.DeleteIcon onClick={onToggleModal} />

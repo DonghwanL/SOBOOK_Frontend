@@ -79,10 +79,13 @@ export const DeleteIcon = styled(RiDeleteBinLine)`
 `
 
 export const BookShelfContentWrapper = tw.div`
-  flex justify-center mb-10 p-5 w-full h-[230px] max-h-[230px] overflow-auto
+  flex justify-center mb-10 p-5 w-full h-[300px] max-h-[300px] overflow-auto
 `
 
-export const DetailContents = tw.div``
+export const DetailContents = tw.div`
+  w-full p-5 text-sm
+  border rounded-md
+`
 
 export const BookShelfEditorWrapper = styled.div`
   ${tw`mb-5 p-5 w-full flex flex-col justify-center`}

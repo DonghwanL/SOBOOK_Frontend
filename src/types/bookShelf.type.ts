@@ -8,9 +8,9 @@ export interface CreateShelfType {
 
 export interface UpdateShelfType {
   id: number
-  rating: number
-  status: string
-  memo: string
+  rating?: number
+  status?: string
+  memo?: string
 }
 
 export interface BookShelfType {
@@ -29,20 +29,10 @@ export interface BookShelfType {
   rating: number
   memo: string
   updateAt: Date
+  onClickStatus?: () => void
 }
 
-export interface BookShelfItemProps {
-  data: {
-    id: number
-    title: string
-    image: string
-    author: string
-    publisher: string
-    pubdate: string
-    status: string
-    rating: number
-    memo: string
-    createdAt: Date
-    updateAt: Date
-  }
+export interface BookStatusPrpsType {
+  status: string
+  onClickStatus?: () => void
 }

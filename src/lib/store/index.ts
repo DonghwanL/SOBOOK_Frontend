@@ -1,5 +1,6 @@
 import { atom } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
+import { BookShelfType } from '@type/index'
 
 // Fetch Data
 export const bookListState = atom({
@@ -17,9 +18,9 @@ export const bookShelfListState = atom({
   default: [],
 })
 
-export const bookShelfDetailState = atom({
+export const bookShelfDetailState = atom<BookShelfType>({
   key: `bookShelfDetailState/${uuidv4()}`,
-  default: [],
+  default: {},
 })
 
 // Search & Pagination
