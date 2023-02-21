@@ -10,7 +10,7 @@ export interface UpdateShelfType {
   id: number
   rating?: number
   status?: string
-  memo?: string
+  contents?: string
 }
 
 export interface BookShelfType {
@@ -27,7 +27,7 @@ export interface BookShelfType {
   createdAt: Date
   status: string
   rating: number
-  memo: string
+  contents: string
   updateAt: Date
   onClickStatus?: () => void
 }

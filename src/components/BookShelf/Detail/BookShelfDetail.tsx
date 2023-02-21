@@ -21,7 +21,7 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [status, setStatus] = useState<string>(data.status)
   const [rating, setRating] = useState<number>(0)
-  const [contents, setContents] = useState<string>(data.memo)
+  const [contents, setContents] = useState<string>(data.contents)
   let isServer = typeof window === 'undefined' ? false : true
 
   const onToggleModal = () => {
@@ -69,7 +69,7 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
   const onClickEdit = async () => {
     const updateData = {
       id: data.id,
-      memo: contents,
+      contents,
     }
 
     try {
@@ -83,8 +83,8 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
 
   useEffect(() => {
     setStatus(data.status)
-    setContents(data.memo)
-  }, [data.status, data.memo])
+    setContents(data.contents)
+  }, [data.status, data.contents])
 
   return (
     <S.BookShelfDetailWrapper>
@@ -100,8 +100,8 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
         </S.BookShelfEditorWrapper>
       ) : (
         <S.BookShelfContentWrapper>
-          {data.memo && isServer ? (
-            <S.DetailContents dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.memo) }} />
+          {data.contents && isServer ? (
+            <S.DetailContents dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.contents) }} />
           ) : (
             <S.DetailEmptyContents>등록된 메모가 없습니다.</S.DetailEmptyContents>
           )}

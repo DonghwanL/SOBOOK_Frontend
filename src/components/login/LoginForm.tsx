@@ -72,10 +72,10 @@ const LoginForm = () => {
         />
         {/* Button Group */}
         <S.LoginButton type="submit">로그인</S.LoginButton>
-        <S.KakaoButton type="button">
+        {/* <S.KakaoButton type="button">
           <Image src={KakaoIcon} alt="kakaoIcon" width={24} height={21} />
           카카오로 시작하기
-        </S.KakaoButton>
+        </S.KakaoButton> */}
         <S.LoginFooter>
           <S.SignupMessage>아직 회원이 아니신가요?</S.SignupMessage>
           <Link href="/signup">

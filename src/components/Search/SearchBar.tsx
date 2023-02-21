@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { searchKeywordState, startPageState, activedPageState } from '@/src/lib/store'
 import Modal from '@components/Common/Modal/Modal'
@@ -23,6 +23,12 @@ const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
     setSearchKeyword(event.target.value)
   }
 
+  const onHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onClickSearch()
+    }
+  }
+
   const onClickSearch = () => {
     if (!searchKeyword) {
       onToggleModal()
@@ -40,7 +46,13 @@ const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
 
   return (
     <S.SearchWrapper>
-      <S.SearchInput type="text" placeholder="검색" value={searchKeyword} onChange={onChangeKeyword} />
+      <S.SearchInput
+        type="text"
+        placeholder="검색"
+        value={searchKeyword}
+        onChange={onChangeKeyword}
+        onKeyDown={onHandleKeyDown}
+      />
       {searchKeyword && (
         <S.SearchResetButton onClick={onClickSearchReset}>
           <S.SearchResetIcon />

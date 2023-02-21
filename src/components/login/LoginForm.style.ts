@@ -25,7 +25,7 @@ export const LoginInput = styled.input<LoginStyleProps>`
 `
 
 export const LoginButton = tw.button`
-  w-full rounded-md p-3 mt-1 mb-4
+  w-full rounded-md p-3 mt-1 mb-8
   font-bold text-white bg-indigo-500
 `
 
