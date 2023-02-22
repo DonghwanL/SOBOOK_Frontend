@@ -18,6 +18,10 @@ export const UPDATE_BOOK_STATUS = (data: UpdateShelfType) => {
   return apiClient.patch(`${API_SERVER}/api/bookShelf/status/${data.id}`, data)
 }
 
+export const UPDATE_BOOK_RATING = (data: UpdateShelfType) => {
+  return apiClient.patch(`${API_SERVER}/api/bookShelf/rating/${data.id}`, data)
+}
+
 export const UPDATE_BOOK_CONTENTS = (data: UpdateShelfType) => {
   return apiClient.patch(`${API_SERVER}/api/bookShelf/contents/${data.id}`, data)
 }

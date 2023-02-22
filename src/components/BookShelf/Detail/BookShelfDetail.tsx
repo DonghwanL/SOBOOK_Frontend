@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
-import { bookShelfDetailState } from '@lib/store'
-import { UPDATE_BOOK_STATUS, UPDATE_BOOK_CONTENTS, DELETE_BOOK_SHELF } from '@lib/api/bookShelf'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { bookContentsState, bookRatingState, bookShelfDetailState, bookStatusState } from '@lib/store'
+import { UPDATE_BOOK_STATUS, UPDATE_BOOK_RATING, UPDATE_BOOK_CONTENTS, DELETE_BOOK_SHELF } from '@lib/api/bookShelf'
 import * as DOMPurify from 'dompurify'
 import * as S from '@components/BookShelf/Detail/BookShelfDetail.style'
 import BookShelfDetailInfo from '@components/BookShelf/Detail/BookShelfDetailInfo'
@@ -16,46 +16,17 @@ type BookShelfDetailProps = {
 
 const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
   const router = useRouter()
-  const data = useRecoilValue(bookShelfDetailState)
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [status, setStatus] = useState<string>(data.status)
-  const [rating, setRating] = useState<number>(0)
-  const [contents, setContents] = useState<string>(data.contents)
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [status, setStatus] = useRecoilState(bookStatusState)
+  const [rating, setRating] = useRecoilState(bookRatingState)
+  const [contents, setContents] = useRecoilState(bookContentsState)
+  const data = useRecoilValue(bookShelfDetailState)
   let isServer = typeof window === 'undefined' ? false : true
 
-  const onToggleModal = () => {
-    setIsOpenModal((prev) => !prev)
-  }
-
-  const onConfirmModal = () => {
-    onClickDeleteIcon()
-  }
-
-  const onClickStatus = async () => {
-    console.log(data.status)
-    setStatus((status) => (status = 'COMPLETE'))
-    onStateUpdate()
-  }
-
-  const onStateUpdate = async () => {
-    const updateState = {
-      id: data.id,
-      status,
-    }
-
-    console.log(updateState)
-
-    try {
-      await UPDATE_BOOK_STATUS(updateState)
-    } catch (err) {
-      console.log('Book State Update Failed')
-    }
-  }
-
-  const onClickEditIcon = () => {
-    setIsEdit((prev) => !prev)
-  }
+  const onToggleModal = () => setIsOpenModal((prev) => !prev)
+  const onConfirmModal = () => onClickDeleteIcon()
+  const onClickEditIcon = () => setIsEdit((prev) => !prev)
 
   const onClickDeleteIcon = async () => {
     try {
@@ -66,7 +37,32 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
     }
   }
 
-  const onClickEdit = async () => {
+  const onEditStatus = async () => {
+    const updateState = {
+      id: data.id,
+      status,
+    }
+    try {
+      await UPDATE_BOOK_STATUS(updateState)
+    } catch (err) {
+      console.log('Book State Update Failed')
+    }
+  }
+
+  const onEditRating = async () => {
+    const updateRating = {
+      id: data.id,
+      rating,
+    }
+
+    try {
+      await UPDATE_BOOK_RATING(updateRating)
+    } catch (error) {
+      console.log('Rating Update Failed')
+    }
+  }
+
+  const onEditContents = async () => {
     const updateData = {
       id: data.id,
       contents,
@@ -83,20 +79,25 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
 
   useEffect(() => {
     setStatus(data.status)
+    setRating(data.rating)
     setContents(data.contents)
-  }, [data.status, data.contents])
+  }, [data.status, data.rating, data.contents])
+
+  useEffect(() => {
+    onEditStatus()
+  }, [status])
 
   return (
     <S.BookShelfDetailWrapper>
-      <BookShelfDetailInfo status={status} onClickStatus={onClickStatus} />
+      <BookShelfDetailInfo onEditRating={onEditRating} />
       <S.DetailBtnGroup>
         <S.EditIcon onClick={onClickEditIcon} />
         <S.DeleteIcon onClick={onToggleModal} />
       </S.DetailBtnGroup>
       {isEdit ? (
         <S.BookShelfEditorWrapper>
-          <Editor contents={contents} setContents={setContents} />
-          <S.EditBtn onClick={onClickEdit}>수정하기</S.EditBtn>
+          <Editor />
+          <S.EditBtn onClick={onEditContents}>수정하기</S.EditBtn>
         </S.BookShelfEditorWrapper>
       ) : (
         <S.BookShelfContentWrapper>

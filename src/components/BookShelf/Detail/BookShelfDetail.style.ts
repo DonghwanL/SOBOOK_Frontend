@@ -33,7 +33,7 @@ export const BookShelfDetailInfoWrapper = tw.div`
 
 export const DetailImage = tw.div`
   rounded-lg shadow-md h-auto overflow-hidden
-  w-2/5 mb-5 sm:w-1/5 xl:w-1/6 sm:mr-10
+  w-2/6 mb-5 sm:w-1/6 sm:mr-10
 `
 
 export const BookShelfDetailInfo = tw.div`
@@ -54,7 +54,7 @@ export const DetailPublisher = tw.p`
 `
 
 export const DetailStatus = styled.span<BookShelfDetailStyleProps>`
-  ${tw`mb-3 p-2 rounded-lg text-xs text-white font-bold cursor-pointer`}
+  ${tw`mb-2 p-2 rounded-lg text-xs text-white font-bold cursor-pointer`}
   background-color: ${(props) => (props.status === 'READING' ? '#e17055' : '#2ecc71')};
 `
 

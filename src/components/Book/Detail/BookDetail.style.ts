@@ -11,7 +11,7 @@ export const BookDetailWrapper = tw.section`
   w-full md:w-4/5 lg:w-4/5 xl:w-3/5 2xl:w-3/5
 `
 export const BookDetailImage = tw.div`
-  rounded-lg shadow-md w-2/6 h-auto overflow-hidden mb-10 
+  rounded-lg shadow-md w-2/5 sm:w-1/5 h-auto overflow-hidden mb-10 
 `
 export const BookDetailTitle = tw.h1`
   text-base font-bold mb-2 px-5
@@ -66,7 +66,7 @@ export const BookDetailInfoContent = tw.span`
   mb-1
 `
 export const BookDetailDescription = tw.div`
-  p-7 mb-10
+  p-7 mb-10 lg:p-10
   text-sm leading-7
 `
 export const DescriptionMoreBtn = styled.button`

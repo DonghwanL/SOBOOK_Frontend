@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react'
+
 export interface CreateShelfType {
   title: string
   image: string
@@ -29,10 +31,24 @@ export interface BookShelfType {
   rating: number
   contents: string
   updateAt: Date
-  onClickStatus?: () => void
+}
+
+export interface BookShelfItemProps {
+  data: {
+    id: number
+    title: string
+    image: string
+    author: string
+    publisher: string
+    pubdate: string
+    status: string
+    rating: number
+    contents: string
+    createdAt: Date
+    updateAt: Date
+  }
 }
 
 export interface BookStatusPrpsType {
-  status: string
-  onClickStatus?: () => void
+  onEditRating?: () => void
 }

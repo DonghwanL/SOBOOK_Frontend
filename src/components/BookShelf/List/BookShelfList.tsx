@@ -1,38 +1,34 @@
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { bookShelfListState } from '@lib/store'
-import { FETCH_BOOK_SHELF_LIST } from '@/src/lib/api/bookShelf'
-import { BookShelfType } from '@/src/types'
+import { useQuery } from 'react-query'
+import { FETCH_BOOK_SHELF_LIST } from '@lib/api/bookShelf'
+import { BookShelfType } from '@type/index'
 import * as S from '@components/BookShelf/List/BookShelfList.style'
-import BookShelfItems from '../ListItem/BookShelfListItem'
+import BookShelfItems from '@components/BookShelf/ListItem/BookShelfListItem'
 import NoDataResult from './NoDataResult'
 
 const BookShelfList = () => {
   const [userName, setUserName] = useState('')
-  const [bookShelfList, setBookShelfList] = useRecoilState(bookShelfListState)
+  const { data, isLoading } = useQuery('bookShelfList', async () => {
+    const { data } = await FETCH_BOOK_SHELF_LIST()
+    return data
+  })
 
   useEffect(() => {
     const userName = localStorage.getItem('userInfo')
     if (userName) setUserName(userName)
-    fetchBookShelfList()
   }, [])
 
-  const fetchBookShelfList = async () => {
-    try {
-      const response = await FETCH_BOOK_SHELF_LIST()
-      setBookShelfList(response.data)
-    } catch (err) {
-      console.log(err)
-    }
+  if (isLoading) {
+    return <span>Loading...</span>
   }
 
   return (
     <S.BookShelfWrapper>
       <S.BookShelfTitle>{userName}님의 서재</S.BookShelfTitle>
-      {bookShelfList.length ? (
+      {data ? (
         <S.BookShelfItemsWrapper>
-          {bookShelfList.map((data: BookShelfType) => (
-            <BookShelfItems key={String(data.id)} data={data} />
+          {data?.map((el: BookShelfType) => (
+            <BookShelfItems key={String(el.id)} data={el} />
           ))}
         </S.BookShelfItemsWrapper>
       ) : (

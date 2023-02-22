@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
-import { Dispatch, SetStateAction } from 'react'
 import 'react-quill/dist/quill.snow.css'
+import { useRecoilState } from 'recoil'
+import { bookContentsState } from '@/src/lib/store'
 
 const modules = {
   toolbar: {
@@ -62,12 +63,8 @@ const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
 })
 
-type QuillEditorProps = {
-  contents: string
-  setContents: Dispatch<SetStateAction<string>>
-}
-
-const Editor = ({ contents, setContents }: QuillEditorProps) => {
+const Editor = () => {
+  const [contents, setContents] = useRecoilState(bookContentsState)
   return <ReactQuill modules={modules} value={contents} onChange={setContents} />
 }
 

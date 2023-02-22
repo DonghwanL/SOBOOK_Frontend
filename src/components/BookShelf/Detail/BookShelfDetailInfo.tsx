@@ -1,19 +1,23 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { BookStatusPrpsType } from '@type/index'
-import { bookShelfDetailState } from '@lib/store'
+import { bookShelfDetailState, bookStatusState } from '@lib/store'
 import * as S from '@components/BookShelf/Detail/BookShelfDetail.style'
+import Rating from '@components/Common/Rating/Rating'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
-const BookShelfDetailInfo = ({ status, onClickStatus }: BookStatusPrpsType) => {
+const BookShelfDetailInfo = ({ onEditRating }: BookStatusPrpsType) => {
   const router = useRouter()
   const data = useRecoilValue(bookShelfDetailState)
+  const [status, setStatus] = useRecoilState(bookStatusState)
 
   const onClickBackBtn = () => {
     router.back()
   }
+
+  const onClickStatus = () => setStatus((prevState) => (prevState === 'READING' ? 'COMPLETE' : 'READING'))
 
   return (
     <>
@@ -43,9 +47,10 @@ const BookShelfDetailInfo = ({ status, onClickStatus }: BookStatusPrpsType) => {
           <S.DetailPublisher>
             {data.publisher} / {dayjs(data.pubdate).format('YYYY.MM.DD')}
           </S.DetailPublisher>
-          <S.DetailStatus onClick={onClickStatus} status={status || 'READING'}>
+          <S.DetailStatus onClick={onClickStatus} status={status}>
             {status}
           </S.DetailStatus>
+          <Rating onEditRating={onEditRating} />
         </S.BookShelfDetailInfo>
       </S.BookShelfDetailInfoWrapper>
     </>

@@ -39,3 +39,13 @@ export const SkeletonFlexBox = tw.div`
 export const SkeletonButton = tw.div`
   w-14 sm:w-20 bg-gray-300 h-6 rounded-md p-2 mr-3
 `
+
+/* Book Shelf List */
+
+export const SkeletonItemsWrapper = tw.div`
+  grid grid-cols-1 grid-rows-1 p-5
+  sm:grid-rows-2 sm:grid-cols-3 sm:gap-5
+`
+export const SkeletonBookShelfItems = tw.div`
+  flex flex-col animate-pulse items-center justify-center h-auto p-6 mb-5
+`

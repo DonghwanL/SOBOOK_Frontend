@@ -1,55 +1,52 @@
-import { useState } from 'react'
-import { FaStar } from 'react-icons/fa'
 import styled from '@emotion/styled'
+import { AiFillStar } from 'react-icons/ai'
+import { useRecoilState } from 'recoil'
+import { bookRatingState } from '@/src/lib/store'
+import { useEffect } from 'react'
 
-const ARRAY = [0, 1, 2, 3, 4]
+interface RatingProps {
+  onEditRating?: () => void
+}
 
-const Rating = () => {
-  const [clicked, setClicked] = useState([false, false, false, false, false])
+const ARRAY_RATING = [1, 2, 3, 4, 5]
 
-  const handleStarClick = (index: number) => {
-    let clickStates = [...clicked]
+const Rating = ({ onEditRating }: RatingProps) => {
+  const [rating, setRating] = useRecoilState(bookRatingState)
+  const onClickedStar = (arrayIndex: number) => () => setRating(arrayIndex)
 
-    for (let i = 0; i < 5; i++) {
-      clickStates[i] = i <= index ? true : false
-    }
-    setClicked(clickStates)
-
-    let score = clicked.filter(Boolean).length
-    console.log(score)
-  }
+  useEffect(() => {
+    onEditRating()
+  }, [rating])
 
   return (
-    <Stars>
-      {ARRAY.map((el, idx) => {
-        return (
-          <FaStar key={idx} size="50" onClick={() => handleStarClick(el)} className={clicked[el] && 'yellowStar'} />
-        )
-      })}
-    </Stars>
+    <RatingContainer>
+      {ARRAY_RATING.map((arrayindex, index) => (
+        <RatingStar
+          size={25}
+          key={`rating_${index}`}
+          className={arrayindex <= rating ? 'active' : 'inactive'}
+          onClick={onClickedStar(arrayindex)}
+        />
+      ))}
+    </RatingContainer>
   )
 }
 
 export default Rating
 
-export const Stars = styled.div`
+const RatingContainer = styled.div`
   display: flex;
-  padding-top: 5px;
+  text-align: center;
+  margin: 13px 0px;
 
-  & svg {
-    color: gray;
-    cursor: pointer;
+  .inactive {
+    color: #bdc3c7;
   }
+  .active {
+    color: #f39c12;
+  }
+`
 
-  :hover svg {
-    color: #fcc419;
-  }
-
-  & svg:hover ~ svg {
-    color: gray;
-  }
-
-  .yellowStar {
-    color: #fcc419;
-  }
+const RatingStar = styled(AiFillStar)`
+  cursor: pointer;
 `
