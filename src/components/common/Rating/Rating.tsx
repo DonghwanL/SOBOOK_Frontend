@@ -1,22 +1,35 @@
 import styled from '@emotion/styled'
-import { AiFillStar } from 'react-icons/ai'
-import { useRecoilState } from 'recoil'
-import { bookRatingState } from '@/src/lib/store'
 import { useEffect } from 'react'
-
-interface RatingProps {
-  onEditRating?: () => void
-}
+import { AiFillStar } from 'react-icons/ai'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { bookRatingState, bookShelfDetailState } from '@lib/store'
+import { UPDATE_BOOK_RATING } from '@lib/api/bookShelf'
 
 const ARRAY_RATING = [1, 2, 3, 4, 5]
 
-const Rating = ({ onEditRating }: RatingProps) => {
+const Rating = () => {
+  const data = useRecoilValue(bookShelfDetailState)
   const [rating, setRating] = useRecoilState(bookRatingState)
-  const onClickedStar = (arrayIndex: number) => () => setRating(arrayIndex)
+  const onClickedStar = (rating: number) => () => onEditRating(rating)
 
   useEffect(() => {
-    onEditRating()
-  }, [rating])
+    setRating(data.rating)
+  }, [data.rating])
+
+  const onEditRating = async (rating: number) => {
+    setRating(rating)
+
+    const updateRating = {
+      id: data.id,
+      rating,
+    }
+
+    try {
+      await UPDATE_BOOK_RATING(updateRating)
+    } catch (error) {
+      console.log('Rating Update Failed')
+    }
+  }
 
   return (
     <RatingContainer>

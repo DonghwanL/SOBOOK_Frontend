@@ -12,9 +12,9 @@ import Modal from '@components/Common/Modal/Modal'
 
 const BookDetail = ({ data }: BookDetailProps) => {
   const router = useRouter()
-  const [limit, setLimit] = useState(350)
-  const [isDisabled, setIsDisabled] = useState(true)
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [limit, setLimit] = useState<number>(350)
+  const [isDisabled, setIsDisabled] = useState<boolean>(true)
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')

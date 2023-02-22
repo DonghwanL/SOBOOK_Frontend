@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { bookContentsState, bookRatingState, bookShelfDetailState, bookStatusState } from '@lib/store'
-import { UPDATE_BOOK_STATUS, UPDATE_BOOK_RATING, UPDATE_BOOK_CONTENTS, DELETE_BOOK_SHELF } from '@lib/api/bookShelf'
+import { bookContentsState, bookShelfDetailState } from '@lib/store'
+import { UPDATE_BOOK_CONTENTS, DELETE_BOOK_SHELF } from '@lib/api/bookShelf'
 import * as DOMPurify from 'dompurify'
 import * as S from '@components/BookShelf/Detail/BookShelfDetail.style'
 import BookShelfDetailInfo from '@components/BookShelf/Detail/BookShelfDetailInfo'
@@ -16,13 +16,11 @@ type BookShelfDetailProps = {
 
 const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
   const router = useRouter()
+  const data = useRecoilValue(bookShelfDetailState)
   const [isEdit, setIsEdit] = useState<boolean>(false)
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
-  const [status, setStatus] = useRecoilState(bookStatusState)
-  const [rating, setRating] = useRecoilState(bookRatingState)
   const [contents, setContents] = useRecoilState(bookContentsState)
-  const data = useRecoilValue(bookShelfDetailState)
-  let isServer = typeof window === 'undefined' ? false : true
+  const isServer = typeof window === 'undefined' ? false : true
 
   const onToggleModal = () => setIsOpenModal((prev) => !prev)
   const onConfirmModal = () => onClickDeleteIcon()
@@ -34,31 +32,6 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
       router.push('/bookShelf')
     } catch (err) {
       console.log('Delete Failed')
-    }
-  }
-
-  const onEditStatus = async () => {
-    const updateState = {
-      id: data.id,
-      status,
-    }
-    try {
-      await UPDATE_BOOK_STATUS(updateState)
-    } catch (err) {
-      console.log('Book State Update Failed')
-    }
-  }
-
-  const onEditRating = async () => {
-    const updateRating = {
-      id: data.id,
-      rating,
-    }
-
-    try {
-      await UPDATE_BOOK_RATING(updateRating)
-    } catch (error) {
-      console.log('Rating Update Failed')
     }
   }
 
@@ -78,18 +51,12 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
   }
 
   useEffect(() => {
-    setStatus(data.status)
-    setRating(data.rating)
     setContents(data.contents)
-  }, [data.status, data.rating, data.contents])
-
-  useEffect(() => {
-    onEditStatus()
-  }, [status])
+  }, [data.contents])
 
   return (
     <S.BookShelfDetailWrapper>
-      <BookShelfDetailInfo onEditRating={onEditRating} />
+      <BookShelfDetailInfo />
       <S.DetailBtnGroup>
         <S.EditIcon onClick={onClickEditIcon} />
         <S.DeleteIcon onClick={onToggleModal} />

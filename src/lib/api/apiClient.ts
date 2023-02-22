@@ -63,7 +63,7 @@ const getRefreshToken = mem(async (): Promise<string | void> => {
 
     setCookie('refreshToken', refresh_token)
     localStorage.setItem('accessToken', access_token)
-    localStorage.setItem('nickname', nickname)
+    localStorage.setItem('userInfo', nickname)
 
     return access_token
   } catch (e) {

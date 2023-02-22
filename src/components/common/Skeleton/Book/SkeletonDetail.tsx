@@ -1,4 +1,4 @@
-import * as S from '@components/Common/Skeleton/Skeleton.style'
+import * as S from '@components/Common/Skeleton/Book/SkeletonDetail.style'
 
 const SkeletonDetail = () => {
   return (

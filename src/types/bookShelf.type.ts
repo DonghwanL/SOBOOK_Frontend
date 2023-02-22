@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
-
 export interface CreateShelfType {
   title: string
   image: string
@@ -47,8 +45,4 @@ export interface BookShelfItemProps {
     createdAt: Date
     updateAt: Date
   }
-}
-
-export interface BookStatusPrpsType {
-  onEditRating?: () => void
 }

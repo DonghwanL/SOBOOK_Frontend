@@ -1,14 +1,15 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { BookStatusPrpsType } from '@type/index'
+import { UPDATE_BOOK_STATUS } from '@lib/api/bookShelf'
 import { bookShelfDetailState, bookStatusState } from '@lib/store'
 import * as S from '@components/BookShelf/Detail/BookShelfDetail.style'
 import Rating from '@components/Common/Rating/Rating'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 
-const BookShelfDetailInfo = ({ onEditRating }: BookStatusPrpsType) => {
+const BookShelfDetailInfo = () => {
   const router = useRouter()
   const data = useRecoilValue(bookShelfDetailState)
   const [status, setStatus] = useRecoilState(bookStatusState)
@@ -18,6 +19,27 @@ const BookShelfDetailInfo = ({ onEditRating }: BookStatusPrpsType) => {
   }
 
   const onClickStatus = () => setStatus((prevState) => (prevState === 'READING' ? 'COMPLETE' : 'READING'))
+
+  const onEditStatus = async (status: string) => {
+    const updateState = {
+      id: data.id,
+      status,
+    }
+
+    try {
+      await UPDATE_BOOK_STATUS(updateState)
+    } catch (err) {
+      console.log('Book State Update Failed')
+    }
+  }
+
+  useEffect(() => {
+    setStatus(data.status)
+  }, [data.status])
+
+  useEffect(() => {
+    onEditStatus(status)
+  }, [status])
 
   return (
     <>
@@ -50,7 +72,7 @@ const BookShelfDetailInfo = ({ onEditRating }: BookStatusPrpsType) => {
           <S.DetailStatus onClick={onClickStatus} status={status}>
             {status}
           </S.DetailStatus>
-          <Rating onEditRating={onEditRating} />
+          <Rating />
         </S.BookShelfDetailInfo>
       </S.BookShelfDetailInfoWrapper>
     </>

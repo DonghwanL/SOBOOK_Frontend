@@ -6,7 +6,7 @@ import { parseString } from 'xml2js'
 import { BookListsType } from '@type/bookLists.type'
 import { FETCH_SEARCH_DETAIL_BOOK } from '@lib/api/books'
 import BookDetail from '@components/Book/Detail/BookDetail'
-import SkeletonDetail from '@components/Common/Skeleton/SkeletonDetail'
+import SkeletonDetail from '@components/Common/Skeleton/Book/SkeletonDetail'
 
 type IndexSignatureType = {
   [key: string]: string

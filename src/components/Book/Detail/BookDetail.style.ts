@@ -14,7 +14,7 @@ export const BookDetailImage = tw.div`
   rounded-lg shadow-md w-2/5 sm:w-1/5 h-auto overflow-hidden mb-10 
 `
 export const BookDetailTitle = tw.h1`
-  text-base font-bold mb-2 px-5
+  text-base font-bold mb-2 px-5 sm:px-10
   sm:text-lg
 `
 export const BookDetailAuthor = tw.span`

@@ -4,11 +4,12 @@ import { useSetRecoilState } from 'recoil'
 import { bookShelfDetailState } from '@lib/store'
 import { FETCH_BOOK_SHELF_DETAIL } from '@lib/api/bookShelf'
 import BookShelfDetail from '@components/BookShelf/Detail/BookShelfDetail'
+import SkeletonBookShelfDetail from '@components/Common/Skeleton/BookShelf/SkeletonBookShelfDetail'
 import withAuth from '@hocs/withAuth'
 
 const BookShelfDetailPage = () => {
   const router = useRouter()
-  const [isFetch, setIsFetch] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const setDetailBookShelf = useSetRecoilState(bookShelfDetailState)
 
   useEffect(() => {
@@ -19,16 +20,18 @@ const BookShelfDetailPage = () => {
 
   const fetchDetailBookShelf = async () => {
     try {
-      setIsFetch(false)
+      setIsLoading(false)
       const response = await FETCH_BOOK_SHELF_DETAIL(Number(router.query.id))
       setDetailBookShelf(response.data)
-      setIsFetch(true)
+      setIsLoading(true)
     } catch (err) {
       console.error('Detail Shelf Fetching Error')
     }
   }
 
-  return <>{isFetch ? <BookShelfDetail fetchDetailBookShelf={fetchDetailBookShelf} /> : <div></div>}</>
+  return (
+    <>{isLoading ? <BookShelfDetail fetchDetailBookShelf={fetchDetailBookShelf} /> : <SkeletonBookShelfDetail />}</>
+  )
 }
 
 export default withAuth(BookShelfDetailPage)
