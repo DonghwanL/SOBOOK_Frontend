@@ -12,7 +12,7 @@ type SearchBarProps = {
 const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [searchKeyword, setSearchKeyword] = useRecoilState(searchKeywordState)
-  const setStartPage = useSetRecoilState(startPageState)
+  const [page, setPage] = useRecoilState(startPageState)
   const setActivedPage = useSetRecoilState(activedPageState)
 
   const onToggleModal = () => {
@@ -35,7 +35,11 @@ const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
       return
     }
 
-    setStartPage(1)
+    // if (page > 1) {
+
+    // }
+
+    setPage(1)
     setActivedPage(1)
     fetchSearchBooks()
   }

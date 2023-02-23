@@ -4,12 +4,12 @@ export const BookListItemsWrapper = tw.div`
   rounded-md mb-5
   bg-gray-100
   dark:bg-slate-800
-  w-full md:w-4/5 xl:w-3/5
+  w-full md:w-4/5 xl:w-4/6 2xl:w-2/5
 `
 
 export const BookListItems = tw.div`
-   p-6 flex flex-col items-center justify-center
-   sm:flex-row
+  p-6 flex flex-col items-center justify-center
+  sm:flex-row
 `
 
 export const BookThumbnail = tw.div`
@@ -22,15 +22,15 @@ export const BookDocuments = tw.div`
 `
 
 export const BookTitle = tw.h1`
-  text-base font-bold mb-2 cursor-pointer
-  sm:text-lg hover:opacity-60 hover:underline
+  text-sm font-bold mb-2 cursor-pointer
+  sm:text-base hover:opacity-60 hover:underline
 `
 
 export const BookAuthors = tw.span`
   block mb-1
-  text-sm sm:text-base
+  text-sm
 `
 
 export const BookPublisher = tw.p`
-  text-sm sm:text-base
+  text-sm
 `

@@ -2,13 +2,13 @@ import tw from 'twin.macro'
 
 export const VisualWrapper = tw.section`
   w-full flex justify-center items-center
-  p-7 mt-3 mb-5
+  p-5 mt-3 mb-5
 `
 export const VisualBox = tw.div`
   flex flex-col justify-between 
-  rounded-md p-5
+  rounded-md p-3
   text-white bg-indigo-600 dark:bg-slate-900 
-  w-full md:w-4/5 lg:w-4/5 xl:w-3/5 2xl:w-3/5
+  w-full md:w-4/5 lg:w-4/6 2xl:w-2/5
   sm:flex-row
 `
 export const VisualContent = tw.div`

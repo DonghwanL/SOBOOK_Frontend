@@ -1,9 +1,9 @@
 import { atom } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
-import { BookShelfType } from '@type/index'
+import { BookListsType, BookShelfType } from '@type/index'
 
 // Fetch Data
-export const bookListState = atom({
+export const bookListState = atom<BookListsType[]>({
   key: `bookListState/${uuidv4()}`,
   default: [],
 })
@@ -18,7 +18,13 @@ export const bookShelfDetailState = atom<BookShelfType>({
   default: {},
 })
 
-// Update Book Shelf
+// Book Shelf
+
+export const userNameState = atom<string>({
+  key: `userNameState/${uuidv4()}`,
+  default: '',
+})
+
 export const bookRatingState = atom<number>({
   key: `bookRatingState/${uuidv4()}`,
   default: 0,

@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useQuery } from 'react-query'
+import { useRecoilState } from 'recoil'
+import { userNameState } from '@lib/store'
 import { FETCH_BOOK_SHELF_LIST } from '@lib/api/bookShelf'
 import { BookShelfType } from '@type/index'
 import * as S from '@components/BookShelf/List/BookShelfList.style'
@@ -8,7 +10,7 @@ import SkeletonBookShelfList from '@components/Common/Skeleton/BookShelf/Skeleto
 import NoDataResult from './NoDataResult'
 
 const BookShelfList = () => {
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useRecoilState(userNameState)
   const { data, isLoading } = useQuery('bookShelfList', async () => {
     const { data } = await FETCH_BOOK_SHELF_LIST()
     return data
