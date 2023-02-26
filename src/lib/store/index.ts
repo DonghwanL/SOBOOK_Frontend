@@ -50,8 +50,3 @@ export const startPageState = atom<number>({
   key: `startPageState/${uuidv4()}`,
   default: 1,
 })
-
-export const activedPageState = atom<number>({
-  key: `activedPageState/${uuidv4()}`,
-  default: 1,
-})

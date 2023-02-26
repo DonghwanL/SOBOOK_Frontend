@@ -20,16 +20,18 @@ const BookShelfDetailInfo = () => {
 
   const onClickStatus = () => setStatus((prevState) => (prevState === 'READING' ? 'COMPLETE' : 'READING'))
 
-  const onEditStatus = async (status: string) => {
-    const updateState = {
-      id: data.id,
-      status,
-    }
+  const onEditStatus = async () => {
+    if (data.status !== status && status !== '') {
+      const updateState = {
+        id: data.id,
+        status,
+      }
 
-    try {
-      await UPDATE_BOOK_STATUS(updateState)
-    } catch (err) {
-      console.log('Book State Update Failed')
+      try {
+        await UPDATE_BOOK_STATUS(updateState)
+      } catch (err) {
+        console.log('Book State Update Failed')
+      }
     }
   }
 
@@ -38,7 +40,7 @@ const BookShelfDetailInfo = () => {
   }, [data.status])
 
   useEffect(() => {
-    onEditStatus(status)
+    onEditStatus()
   }, [status])
 
   return (
