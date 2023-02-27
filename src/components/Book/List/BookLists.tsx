@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { searchKeywordState, bookListState, startPageState } from '@lib/store'
@@ -12,7 +12,6 @@ import NoResult from '@components/Search/NoSearchResult'
 import Loader from '@components/Common/Loader/Loader'
 
 const BookLists = () => {
-  const router = useRouter()
   const [isFetch, setIsFetch] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [hasMore, setHasMore] = useState<boolean>(true)
@@ -20,17 +19,14 @@ const BookLists = () => {
   const [bookLists, setBookLists] = useRecoilState(bookListState)
   const searchKeyword = useRecoilValue(searchKeywordState)
 
+  const nextPage = () => setPage((prev) => prev + 10)
+
   useEffect(() => {
-    if (bookLists.length) {
-      setIsFetch(true)
-    }
+    if (bookLists.length) setIsFetch(true)
   }, [bookLists])
 
   useEffect(() => {
-    if (page >= 11) {
-      console.log('??')
-      fetchMoreData()
-    }
+    if (page >= 11) fetchMoreData()
   }, [page])
 
   const fetchSearchBooks = async () => {
@@ -69,21 +65,27 @@ const BookLists = () => {
         return
       }
 
-      setBookLists((prev) => [...prev, ...response.data.items])
+      const mergeArr = [...bookLists, ...response.data.items]
+      const filterBookArr = _.uniqBy(mergeArr, 'isbn')
+
+      setTimeout(() => {
+        setBookLists(filterBookArr)
+      }, 1500)
     } catch {
       console.error('More Fetching Error')
     }
-  }
-
-  const nextPage = () => {
-    setPage((prev) => prev + 10)
   }
 
   return (
     <>
       <SearchBar fetchSearchBooks={fetchSearchBooks} />
       {isFetch && (
-        <InfiniteScroll dataLength={bookLists.length} next={nextPage} hasMore={hasMore} loader={<Loader />}>
+        <InfiniteScroll
+          dataLength={bookLists.length}
+          next={nextPage}
+          hasMore={hasMore}
+          loader={<Loader />}
+          endMessage={'모든 리스트를 불러 왔습니다.'}>
           <S.BookListsWrapper>
             {bookLists.length ? (
               bookLists.map((el: BookListsType) => <BookListItems key={el.isbn} data={el} />)

@@ -21,13 +21,8 @@ const BookDetail = ({ data }: BookDetailProps) => {
     if (accessToken) setIsDisabled(false)
   })
 
-  const onToggleModal = () => {
-    setIsOpenModal((prev) => !prev)
-  }
-
-  const onClickBackBtn = () => {
-    router.back()
-  }
+  const onToggleModal = () => setIsOpenModal((prev) => !prev)
+  const onClickBackBtn = () => router.back()
 
   // 더보기 클릭 시 원본 텍스트 세팅
   const onClickMore = (str: string) => () => {
