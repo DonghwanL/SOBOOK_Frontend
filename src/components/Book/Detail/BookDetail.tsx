@@ -7,6 +7,7 @@ import { CREATE_BOOK_SHELF } from '@lib/api/bookShelf'
 import { BookDetailProps, CreateShelfType } from '@type/index'
 import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
+import ToolTip from '@components/Common/Tooltip/Tooltip'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import Modal from '@components/Common/Modal/Modal'
 
@@ -79,9 +80,15 @@ const BookDetail = ({ data }: BookDetailProps) => {
       <S.BookDetailTitle>{data.title}</S.BookDetailTitle>
       <S.BookDetailAuthor>{data.author.replaceAll('^', ', ')}</S.BookDetailAuthor>
       <S.BookDetailButtonGroup>
-        <S.AddLibraryBtn disabled={isDisabled} disableState={isDisabled} onClick={onClickCreateBtn}>
-          서재에 담기
-        </S.AddLibraryBtn>
+        {isDisabled ? (
+          <ToolTip message="로그인 후 담을 수 있습니다.">
+            <S.AddLibraryBtn disabled={isDisabled} disableState={isDisabled}>
+              서재에 담기
+            </S.AddLibraryBtn>
+          </ToolTip>
+        ) : (
+          <S.AddLibraryBtn onClick={onClickCreateBtn}>서재에 담기</S.AddLibraryBtn>
+        )}
         <Link href={data.link} rel="noopener noreferrer" target="_blank">
           <S.NaverLinkBtn>네이버 페이지 이동</S.NaverLinkBtn>
         </Link>

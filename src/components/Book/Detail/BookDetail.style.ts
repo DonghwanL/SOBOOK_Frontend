@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { MdArrowBackIosNew } from 'react-icons/md'
 
 interface BookDetailStyleProps {
-  disableState: boolean
+  disableState?: boolean
 }
 
 export const BookDetailWrapper = tw.section`

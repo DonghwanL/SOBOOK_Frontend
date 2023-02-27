@@ -7,6 +7,7 @@ import * as DOMPurify from 'dompurify'
 import * as S from '@components/BookShelf/Detail/BookShelfDetail.style'
 import BookShelfDetailInfo from '@components/BookShelf/Detail/BookShelfDetailInfo'
 import Editor from '@components/Common/Editor/Editor'
+import ToolTip from '@components/Common/Tooltip/Tooltip'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import Modal from '@components/Common/Modal/Modal'
 
@@ -58,8 +59,12 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
     <S.BookShelfDetailWrapper>
       <BookShelfDetailInfo />
       <S.DetailBtnGroup>
-        <S.EditIcon onClick={onClickEditIcon} />
-        <S.DeleteIcon onClick={onToggleModal} />
+        <ToolTip message={'수정'}>
+          <S.EditIcon onClick={onClickEditIcon} />
+        </ToolTip>
+        <ToolTip message={'삭제'}>
+          <S.DeleteIcon onClick={onToggleModal} />
+        </ToolTip>
       </S.DetailBtnGroup>
       {isEdit ? (
         <S.BookShelfEditorWrapper>

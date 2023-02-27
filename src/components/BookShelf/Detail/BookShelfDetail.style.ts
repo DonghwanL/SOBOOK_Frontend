@@ -59,7 +59,7 @@ export const DetailStatus = styled.span<BookShelfDetailStyleProps>`
 `
 
 export const DetailBtnGroup = tw.div`
-  w-full flex justify-end px-5
+  w-full flex justify-end px-8
 `
 
 export const EditIcon = styled(BiEdit)`

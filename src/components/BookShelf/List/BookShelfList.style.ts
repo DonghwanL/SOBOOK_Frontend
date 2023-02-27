@@ -8,6 +8,6 @@ export const BookShelfTitle = tw.h1`
 `
 
 export const BookShelfItemsWrapper = tw.div`
-  grid grid-cols-1 grid-rows-1 p-5
+  grid grid-cols-1 grid-rows-1 p-5 2xl:px-52
   sm:grid-rows-2 sm:grid-cols-3 sm:gap-5
 `
