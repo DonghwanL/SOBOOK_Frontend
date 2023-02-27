@@ -40,7 +40,7 @@ export const bookContentsState = atom<string>({
   default: '',
 })
 
-// Search & Pagination
+// Search
 export const searchKeywordState = atom<string>({
   key: `searchKeywordState/${uuidv4()}`,
   default: '',
@@ -49,4 +49,9 @@ export const searchKeywordState = atom<string>({
 export const startPageState = atom<number>({
   key: `startPageState/${uuidv4()}`,
   default: 1,
+})
+
+export const fetchMoreState = atom<boolean>({
+  key: `fetchMoreState/${uuidv4()}`,
+  default: true,
 })

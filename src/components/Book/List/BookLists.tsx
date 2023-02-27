@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { searchKeywordState, bookListState, startPageState } from '@lib/store'
+import { searchKeywordState, bookListState, startPageState, fetchMoreState } from '@lib/store'
 import { FETCH_SEARCH_BOOKS } from '@lib/api/books'
 import { BookListsType } from '@type/bookLists.type'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -14,8 +14,8 @@ import Loader from '@components/Common/Loader/Loader'
 const BookLists = () => {
   const [isFetch, setIsFetch] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [hasMore, setHasMore] = useState<boolean>(true)
   const [page, setPage] = useRecoilState(startPageState)
+  const [hasMore, setHasMore] = useRecoilState(fetchMoreState)
   const [bookLists, setBookLists] = useRecoilState(bookListState)
   const searchKeyword = useRecoilValue(searchKeywordState)
 
@@ -85,7 +85,7 @@ const BookLists = () => {
           next={nextPage}
           hasMore={hasMore}
           loader={<Loader />}
-          endMessage={'모든 리스트를 불러 왔습니다.'}>
+          endMessage={<S.BookListsNoMoreData>모든 리스트를 불러 왔습니다. 🤔</S.BookListsNoMoreData>}>
           <S.BookListsWrapper>
             {bookLists.length ? (
               bookLists.map((el: BookListsType) => <BookListItems key={el.isbn} data={el} />)

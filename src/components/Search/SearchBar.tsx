@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { searchKeywordState, startPageState } from '@lib/store'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { fetchMoreState, searchKeywordState, startPageState } from '@lib/store'
 import Modal from '@components/Common/Modal/Modal'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import * as S from '@components/Search/SearchBar.style'
@@ -12,20 +12,15 @@ type SearchBarProps = {
 const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [searchKeyword, setSearchKeyword] = useRecoilState(searchKeywordState)
-  const [page, setPage] = useRecoilState(startPageState)
+  const setPage = useSetRecoilState(startPageState)
+  const setHasMore = useSetRecoilState(fetchMoreState)
 
-  const onToggleModal = () => {
-    setIsOpenModal((prev) => !prev)
-  }
-
-  const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(event.target.value)
-  }
+  const onToggleModal = () => setIsOpenModal((prev) => !prev)
+  const onChangeKeyword = (event: ChangeEvent<HTMLInputElement>) => setSearchKeyword(event.target.value)
+  const onClickSearchReset = () => setSearchKeyword('')
 
   const onHandleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      onClickSearch()
-    }
+    if (event.key === 'Enter') onClickSearch()
   }
 
   const onClickSearch = () => {
@@ -35,11 +30,8 @@ const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
     }
 
     setPage(1)
+    setHasMore(true)
     fetchSearchBooks()
-  }
-
-  const onClickSearchReset = () => {
-    setSearchKeyword('')
   }
 
   return (
