@@ -13,9 +13,7 @@ const BookShelfDetailPage = () => {
   const setDetailBookShelf = useSetRecoilState(bookShelfDetailState)
 
   useEffect(() => {
-    if (router.isReady) {
-      fetchDetailBookShelf()
-    }
+    if (router.isReady) fetchDetailBookShelf()
   }, [router.isReady])
 
   const fetchDetailBookShelf = async () => {

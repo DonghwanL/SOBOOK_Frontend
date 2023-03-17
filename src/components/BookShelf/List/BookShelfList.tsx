@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import { useQuery } from 'react-query'
-import { useRecoilValue } from 'recoil'
-import { loginState } from '@recoil/atoms'
+import { useRecoilState } from 'recoil'
+import { userInfoState } from '@recoil/atoms'
 import { FETCH_BOOK_SHELF_LIST } from '@api/bookShelf'
 import { BookShelfType } from '@type/index'
 import * as S from '@components/BookShelf/List/BookShelfList.style'
@@ -9,17 +10,22 @@ import SkeletonBookShelfList from '@components/Common/Skeleton/BookShelf/Skeleto
 import NoDataResult from './NoDataResult'
 
 const BookShelfList = () => {
-  const loginUser = useRecoilValue(loginState)
+  const [nickName, setNickname] = useRecoilState(userInfoState)
   const { data, isLoading } = useQuery('bookShelfList', async () => {
     const { data } = await FETCH_BOOK_SHELF_LIST()
     return data
   })
 
+  useEffect(() => {
+    const nickName = localStorage.getItem('userInfo')
+    if (nickName) setNickname(nickName)
+  }, [])
+
   if (isLoading) return <SkeletonBookShelfList />
 
   return (
     <S.BookShelfWrapper>
-      <S.BookShelfTitle>{loginUser.nickname}님의 서재</S.BookShelfTitle>
+      <S.BookShelfTitle>{nickName}님의 서재</S.BookShelfTitle>
       {data.length ? (
         <S.BookShelfItemsWrapper>
           {data?.map((el: BookShelfType) => (

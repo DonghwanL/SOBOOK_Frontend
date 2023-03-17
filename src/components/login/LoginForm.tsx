@@ -6,15 +6,14 @@ import { useForm } from 'react-hook-form'
 import { USER_LOGIN } from '@api/user'
 import { LoginFormType } from '@type/formType.type'
 import { setCookie } from '@utils/cookie'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { loginState, modalState } from '@recoil/atoms'
+import { useRecoilState } from 'recoil'
+import { modalState } from '@recoil/atoms'
 import * as S from '@components/Login/LoginForm.style'
 import KakaoIcon from '@assets/images/kakao_icon.svg'
 import Modal from '@components/Common/Modal/Modal'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 
 const LoginForm = () => {
-  const setIsLogined = useSetRecoilState(loginState)
   const [isOpenModal, setIsOpenModal] = useRecoilState(modalState('login'))
   const router = useRouter()
 
@@ -34,10 +33,10 @@ const LoginForm = () => {
       const result = await USER_LOGIN(data)
       const { access_token, refresh_token, nickname } = result.data
 
-      // Set Token
+      // Set Token & User Info
       setCookie('refreshToken', refresh_token)
       localStorage.setItem('accessToken', access_token)
-      setIsLogined({ isLogined: true, nickname })
+      localStorage.setItem('userInfo', nickname)
       router.push('/')
     } catch (err) {
       onToggleModal()

@@ -3,14 +3,14 @@ import { atom, atomFamily } from 'recoil'
 import { BookListsType, BookShelfType } from '@type/index'
 
 // User
-export const loginState = atom<{ isLogined: boolean; nickname: string }>({
-  key: 'loginState',
-  default: { isLogined: false, nickname: '' },
+export const userInfoState = atom<string>({
+  key: `userInfoState/${uuidv4()}`,
+  default: '',
 })
 
 // Modal
 export const modalState = atomFamily<boolean, string>({
-  key: 'modalState',
+  key: `modalState/${uuidv4()}`,
   default: false,
 })
 

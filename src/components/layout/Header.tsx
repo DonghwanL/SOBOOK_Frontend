@@ -1,27 +1,33 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { USER_LOGOUT } from '@api/user'
 import { removeCookie } from '@utils/cookie'
-import { useRecoilState } from 'recoil'
-import { loginState } from '@recoil/atoms'
 import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
 import ThemeToggler from '@components/Common/ThemeToggler'
 import * as S from '@components/Layout/Header.style'
 
 const Header = () => {
   const router = useRouter()
-  const [loginUser, setLoginUser] = useRecoilState(loginState)
+  const [isLogined, setIsLogined] = useState(false)
   const [isToggleMenu, setIsToggleMenu] = useState(false)
 
-  const onClickMobileToggle = () => setIsToggleMenu((prev) => !prev)
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    if (accessToken) setIsLogined(true)
+  })
+
+  const onClickMobileToggle = () => {
+    setIsToggleMenu((prev) => !prev)
+  }
 
   const onClickLogOut = async () => {
     try {
       await USER_LOGOUT()
       removeCookie('refreshToken')
       localStorage.removeItem('accessToken')
-      setLoginUser({ isLogined: false, nickname: '' })
+      localStorage.removeItem('userInfo')
+      setIsLogined(false)
       router.push('/')
     } catch (err) {
       console.log(err)
@@ -37,7 +43,7 @@ const Header = () => {
           </S.HeaderTitleGroup>
         </Link>
         <S.HeaderNav>
-          {!loginUser.isLogined ? (
+          {!isLogined ? (
             <Link href="/login">
               <S.ButtonStyle>로그인</S.ButtonStyle>
             </Link>
@@ -58,7 +64,7 @@ const Header = () => {
       {/* Mobile Menu */}
       {isToggleMenu && (
         <S.MobileMenuWrapper onClick={onClickMobileToggle}>
-          {!loginUser.isLogined ? (
+          {!isLogined ? (
             <Link href="/login">
               <S.ButtonStyle mobile={true}>로그인</S.ButtonStyle>
             </Link>
