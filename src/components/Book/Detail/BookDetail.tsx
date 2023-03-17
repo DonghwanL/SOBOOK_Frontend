@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { CREATE_BOOK_SHELF } from '@api/bookShelf'
 import { BookDetailProps, CreateShelfType } from '@type/index'
+import { useRecoilState } from 'recoil'
+import { modalState } from '@recoil/atoms'
 import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
 import ToolTip from '@components/Common/Tooltip/Tooltip'
@@ -15,7 +17,7 @@ const BookDetail = ({ data }: BookDetailProps) => {
   const router = useRouter()
   const [limit, setLimit] = useState<number>(350)
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [isOpenModal, setIsOpenModal] = useRecoilState(modalState('bookDetail'))
   const [modalContent, setModalContent] = useState<string>('')
 
   useEffect(() => {

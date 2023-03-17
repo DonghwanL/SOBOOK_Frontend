@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { USER_LOGIN } from '@api/user'
 import { LoginFormType } from '@type/formType.type'
 import { setCookie } from '@utils/cookie'
-import { useSetRecoilState } from 'recoil'
-import { loginState } from '@/src/recoil/atoms'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { loginState, modalState } from '@recoil/atoms'
 import * as S from '@components/Login/LoginForm.style'
 import KakaoIcon from '@assets/images/kakao_icon.svg'
 import Modal from '@components/Common/Modal/Modal'
@@ -15,7 +15,7 @@ import ModalPortal from '@components/Common/Modal/ModalPortal'
 
 const LoginForm = () => {
   const setIsLogined = useSetRecoilState(loginState)
-  const [isOpenModal, setIsOpenModal] = useState<boolean>()
+  const [isOpenModal, setIsOpenModal] = useRecoilState(modalState('login'))
   const router = useRouter()
 
   const onToggleModal = () => setIsOpenModal((prev) => !prev)

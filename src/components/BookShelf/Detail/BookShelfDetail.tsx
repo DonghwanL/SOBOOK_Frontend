@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { bookContentsState, bookShelfDetailState } from '@recoil/atoms'
+import { bookContentsState, bookShelfDetailState, modalState } from '@recoil/atoms'
 import { UPDATE_BOOK_CONTENTS, DELETE_BOOK_SHELF } from '@api/bookShelf'
 import * as DOMPurify from 'dompurify'
 import * as S from '@components/BookShelf/Detail/BookShelfDetail.style'
@@ -19,7 +19,7 @@ const BookShelfDetail = ({ fetchDetailBookShelf }: BookShelfDetailProps) => {
   const router = useRouter()
   const data = useRecoilValue(bookShelfDetailState)
   const [isEdit, setIsEdit] = useState<boolean>(false)
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [isOpenModal, setIsOpenModal] = useRecoilState(modalState('bookShelfDetail'))
   const [contents, setContents] = useRecoilState(bookContentsState)
   const isServer = typeof window === 'undefined' ? false : true
 

@@ -6,13 +6,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from '@utils/signupValidationSchema'
 import { SignUpFormType } from '@type/formType.type'
 import { USER_EMAIL_CHECK, USER_SIGN_UP } from '@api/user'
+import { useRecoilState } from 'recoil'
+import { modalState } from '@recoil/atoms'
 import Modal from '@components/Common/Modal/Modal'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import * as S from '@components/Signup/SignupForm.style'
 
 const SignupForm = () => {
   const [emailCheck, setEmailCheck] = useState(false)
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useRecoilState(modalState('signup'))
   const timerRef: { current: NodeJS.Timeout | null } = useRef(null)
   const router = useRouter()
 
