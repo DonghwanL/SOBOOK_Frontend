@@ -1,5 +1,5 @@
 import { apiClient } from './apiClient'
-import { API_SERVER } from '@lib/api/config'
+import { API_SERVER } from '@api/config'
 import { CreateShelfType, UpdateShelfType } from '@type/index'
 
 export const FETCH_BOOK_SHELF_LIST = () => {

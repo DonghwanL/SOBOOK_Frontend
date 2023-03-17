@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { fetchMoreState, searchKeywordState, startPageState } from '@lib/store'
+import { fetchMoreState, searchKeywordState, pageState } from '@recoil/atoms'
 import Modal from '@components/Common/Modal/Modal'
 import ModalPortal from '@components/Common/Modal/ModalPortal'
 import * as S from '@components/Search/SearchBar.style'
@@ -12,7 +12,7 @@ type SearchBarProps = {
 const SearchBar = ({ fetchSearchBooks }: SearchBarProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [searchKeyword, setSearchKeyword] = useRecoilState(searchKeywordState)
-  const setPage = useSetRecoilState(startPageState)
+  const setPage = useSetRecoilState(pageState)
   const setHasMore = useSetRecoilState(fetchMoreState)
 
   const onToggleModal = () => setIsOpenModal((prev) => !prev)

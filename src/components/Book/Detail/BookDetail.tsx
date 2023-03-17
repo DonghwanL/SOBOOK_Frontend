@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { CREATE_BOOK_SHELF } from '@lib/api/bookShelf'
+import { CREATE_BOOK_SHELF } from '@api/bookShelf'
 import { BookDetailProps, CreateShelfType } from '@type/index'
 import * as S from '@components/Book/Detail/BookDetail.style'
 import NoFoundImage from '@assets/images/no-image-found.jpeg'
@@ -16,6 +16,7 @@ const BookDetail = ({ data }: BookDetailProps) => {
   const [limit, setLimit] = useState<number>(350)
   const [isDisabled, setIsDisabled] = useState<boolean>(true)
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [modalContent, setModalContent] = useState<string>('')
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken')
@@ -50,6 +51,7 @@ const BookDetail = ({ data }: BookDetailProps) => {
 
     try {
       await CREATE_BOOK_SHELF(createData)
+      setModalContent('서재에 등록 되었습니다.')
       setIsOpenModal(true)
     } catch (err) {
       console.log(err)
@@ -118,7 +120,7 @@ const BookDetail = ({ data }: BookDetailProps) => {
       {/* Modal */}
       {isOpenModal && (
         <ModalPortal>
-          <Modal onToggleModal={onToggleModal} contents="서재에 등록 되었습니다." />
+          <Modal onToggleModal={onToggleModal} contents={modalContent} />
         </ModalPortal>
       )}
     </S.BookDetailWrapper>

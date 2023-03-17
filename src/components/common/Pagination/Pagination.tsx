@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { fetchPageState, startPageState, activedPageState } from '@/src/lib/store'
+import { fetchPageState, startPageState, activedPageState } from '@recoil/atoms'
 import * as S from '@components/Common/Pagination/Pagination.style'
 
 interface PaginationProps {

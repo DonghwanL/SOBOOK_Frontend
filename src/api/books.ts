@@ -1,5 +1,5 @@
 import { apiClient } from './apiClient'
-import { API_SERVER } from '@lib/api/config'
+import { API_SERVER } from '@api/config'
 import { SearchParamsType } from '@type/index'
 
 export const FETCH_SEARCH_BOOKS = (params: SearchParamsType) => {

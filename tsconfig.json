@@ -21,8 +21,9 @@
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@hocs/*": ["src/hocs/*"],
-      "@lib/*": ["src/lib/*"],
+      "@api/*": ["src/api/*"],
       "@pages/*": ["src/pages/*"],
+      "@recoil/*": ["src/recoil/*"],
       "@styles/*": ["src/styles/*"],
       "@type/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]

@@ -1,5 +1,5 @@
 import { apiClient } from './apiClient'
-import { API_SERVER } from '@lib/api/config'
+import { API_SERVER } from '@api/config'
 import { LoginFormType, SignUpFormType } from '@type/index'
 
 export const USER_SIGN_UP = (data: SignUpFormType) => {

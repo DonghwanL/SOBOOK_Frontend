@@ -1,6 +1,18 @@
-import { atom } from 'recoil'
+import { atom, atomFamily } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
 import { BookListsType, BookShelfType } from '@type/index'
+
+// User
+export const loginState = atom<{ isLogined: boolean; nickname: string }>({
+  key: `loginState/${uuidv4()}`,
+  default: { isLogined: false, nickname: '' },
+})
+
+// Modal
+export const modalState = atomFamily({
+  key: 'modalState',
+  default: false,
+})
 
 // Fetch Data
 export const bookListState = atom<BookListsType[]>({
@@ -8,7 +20,7 @@ export const bookListState = atom<BookListsType[]>({
   default: [],
 })
 
-export const bookDetailState = atom({
+export const bookDetailState = atom<BookListsType[]>({
   key: `bookDetailState/${uuidv4()}`,
   default: [],
 })
@@ -19,12 +31,6 @@ export const bookShelfDetailState = atom<BookShelfType>({
 })
 
 // Book Shelf
-
-export const userNameState = atom<string>({
-  key: `userNameState/${uuidv4()}`,
-  default: '',
-})
-
 export const bookRatingState = atom<number>({
   key: `bookRatingState/${uuidv4()}`,
   default: 0,
@@ -46,8 +52,8 @@ export const searchKeywordState = atom<string>({
   default: '',
 })
 
-export const startPageState = atom<number>({
-  key: `startPageState/${uuidv4()}`,
+export const pageState = atom<number>({
+  key: `pageState/${uuidv4()}`,
   default: 1,
 })
 

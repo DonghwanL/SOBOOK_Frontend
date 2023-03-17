@@ -1,6 +1,6 @@
 import mem from 'mem'
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { API_SERVER } from '@lib/api/config'
+import { API_SERVER } from '@api/config'
 import { getCookie, removeCookie, setCookie } from '@utils/cookie'
 
 export const apiClient: AxiosInstance = axios.create({

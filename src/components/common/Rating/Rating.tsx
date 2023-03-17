@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 import { useEffect } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { bookRatingState, bookShelfDetailState } from '@lib/store'
-import { UPDATE_BOOK_RATING } from '@lib/api/bookShelf'
+import { bookRatingState, bookShelfDetailState } from '@recoil/atoms'
+import { UPDATE_BOOK_RATING } from '@api/bookShelf'
 
 const ARRAY_RATING = [1, 2, 3, 4, 5]
 

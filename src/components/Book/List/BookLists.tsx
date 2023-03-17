@@ -1,8 +1,8 @@
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { searchKeywordState, bookListState, startPageState, fetchMoreState } from '@lib/store'
-import { FETCH_SEARCH_BOOKS } from '@lib/api/books'
+import { searchKeywordState, bookListState, pageState, fetchMoreState } from '@recoil/atoms'
+import { FETCH_SEARCH_BOOKS } from '@api/books'
 import { BookListsType } from '@type/bookLists.type'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import * as S from '@components/Book/List/BookLists.style'
@@ -14,7 +14,7 @@ import Loader from '@components/Common/Loader/Loader'
 const BookLists = () => {
   const [isFetch, setIsFetch] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [page, setPage] = useRecoilState(startPageState)
+  const [page, setPage] = useRecoilState(pageState)
   const [hasMore, setHasMore] = useRecoilState(fetchMoreState)
   const [bookLists, setBookLists] = useRecoilState(bookListState)
   const searchKeyword = useRecoilValue(searchKeywordState)

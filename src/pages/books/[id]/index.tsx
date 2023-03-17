@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { bookDetailState } from '@/src/lib/store'
+import { bookDetailState } from '@recoil/atoms'
 import { parseString } from 'xml2js'
 import { BookListsType } from '@type/bookLists.type'
-import { FETCH_SEARCH_DETAIL_BOOK } from '@lib/api/books'
+import { FETCH_SEARCH_DETAIL_BOOK } from '@api/books'
 import BookDetail from '@components/Book/Detail/BookDetail'
 import SkeletonDetail from '@components/Common/Skeleton/Book/SkeletonDetail'
 

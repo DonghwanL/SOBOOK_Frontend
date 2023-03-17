@@ -4,7 +4,7 @@ import { RecoilRoot } from 'recoil'
 import { GlobalStyles } from 'twin.macro'
 import { CookiesProvider } from 'react-cookie'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import Layout from '@/src/components/Layout/Layout'
+import Layout from '@components/Layout/Layout'
 import '../styles/tailwind.css'
 
 const queryClient = new QueryClient()
