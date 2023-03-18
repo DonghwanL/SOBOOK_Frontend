@@ -5,7 +5,7 @@ import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai'
 export const SearchWrapper = tw.section`
   flex justify-center items-center mx-auto my-5 text-black p-1
   border rounded-lg
-  w-4/5 md:w-3/5 lg:w-3/5 xl:w-2/6
+  w-4/5 lg:w-3/5 lg:max-w-3xl
   dark:bg-white
 `
 export const SearchInput = tw.input`
